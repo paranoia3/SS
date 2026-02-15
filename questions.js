@@ -1,10 +1,6 @@
-/**
- * БАЗА ВОПРОСОВ (v5.0 - 6 Variants)
- * Всего: 177 вопросов.
- * Разбиение: 6 вариантов по ~30 вопросов.
- */
+
 const questionsDB = [
-    // --- ВАРИАНТ 1 (30 вопросов) ---
+    // --- ВАРИАНТ 1 (31 вопрос) ---
     { v: 1, q: "In a storage controller, what is a cache?", o: ["A power supply unit", "A memory chip on the disk controller that buffers data between internal storage and external interfaces", "A network switch", "A dedicated flash disk for logs"], a: [1] },
     { v: 1, q: "The earliest form of external storage is:", o: ["Cloud storage", "NVMe", "JBOD", "SSD"], a: [2] },
     { v: 1, q: "Internal storage is typically located:", o: ["Remote data center", "On network appliances", "Inside the host", "Inside a cloud pool"], a: [2] },
@@ -35,8 +31,9 @@ const questionsDB = [
     { v: 1, q: "RAID 10 provides:", o: ["Compression", "High performance", "Mirroring", "Striping", "No redundancy"], a: [1] },
     { v: 1, q: "RAID 10 is a combination of:", o: ["RAID 0 + RAID 0", "RAID 1 + RAID 0", "RAID 6 + RAID 0", "RAID 5 + RAID 0"], a: [1] },
     { v: 1, q: "Which RAID level uses distributed parity?", o: ["RAID 1", "RAID 10", "RAID 0", "RAID 3", "RAID 5"], a: [4] },
+    { v: 1, q: "Which items belong to storage device information? (Choose THREE)", o: ["System logs", "OS version", "IP address", "Indicator status", "Hardware configuration", "Network topology"], a: [0, 3, 4] },
 
-    // --- ВАРИАНТ 2 (30 вопросов) ---
+    // --- ВАРИАНТ 2 (31 вопрос) ---
     { v: 2, q: "Which RAID evolution technique distributes data blocks across all disks?", o: ["Block virtualization", "Parity mapping", "Disk mirroring", "LUN virtualization"], a: [0] },
     { v: 2, q: "Which properties are improved by RAID-TP?", o: ["Capacity utilization", "Reliability", "Cache size", "File indexing"], a: [1] },
     { v: 2, q: "Components of RAID 2.0+ include: (Select one or more)", o: ["Chunk Group", "NIC", "Disk Group", "Disk Domain", "CPU Cache"], a: [0, 3] },
@@ -67,8 +64,9 @@ const questionsDB = [
     { v: 2, q: "Which protocol is designed for high-speed storage networks?", o: ["SATA", "CIFS", "NFS", "USB", "Fibre Channel (FC)"], a: [4] },
     { v: 2, q: "What does SCSI stand for?", o: ["Smart Computer System Interface", "Secure Computer Storage Interface", "Small Computer System Interface", "Serial Computer System Interface"], a: [2] },
     { v: 2, q: "Which iSCSI initiator has the highest performance?", o: ["Software initiator", "USB adapter", "TOE NIC", "iSCSI HBA", "Ethernet NIC"], a: [3] },
+    { v: 2, q: "Which features are provided by eService? (Choose THREE)", o: ["Disk risk prediction", "Performance prediction", "Capacity prediction", "RAID configuration", "User authentication", "LUN creation"], a: [0, 1, 2] },
 
-    // --- ВАРИАНТ 3 (30 вопросов) ---
+    // --- ВАРИАНТ 3 (31 вопрос) ---
     { v: 3, q: "What is a LUN?", o: ["A file unit", "A disk controller", "A logical storage unit", "A parity block"], a: [2] },
     { v: 3, q: "How many main layers does FC protocol have?", o: ["5", "6", "3", "4", "7"], a: [0] },
     { v: 3, q: "Which protocol carries SCSI commands over IP?", o: ["SAS", "FC", "FCoE", "iSCSI", "NVMe"], a: [3] },
@@ -99,8 +97,9 @@ const questionsDB = [
     { v: 3, q: "RAID 2.0+ uses which concepts? (Select THREE)", o: ["Grains", "Chunks", "CKGs", "Files", "Packets"], a: [0, 1, 2] },
     { v: 3, q: "Which RAID level offers the best performance but no redundancy?", o: ["RAID 3", "RAID 5", "RAID 1", "RAID 0", "RAID 10"], a: [3] },
     { v: 3, q: "Which process occurs first in SmartMigration?", o: ["Service data synchronization", "Pair splitting", "Cache flush", "LUN information exchange", "Consistency check"], a: [0] },
+    { v: 3, q: "Which structure records logical-to-physical mapping in SmartThin?", o: ["Cache directory", "Snapshot index", "Allocation log", "RAID table", "Mapping table"], a: [4] },
 
-    // --- ВАРИАНТ 4 (29 вопросов) ---
+    // --- ВАРИАНТ 4 (31 вопрос) ---
     { v: 4, q: "What is snapshot cascading?", o: ["Snapshot encryption", "Deleting old snapshots", "Creating child snapshots that include parent data", "Merging snapshots"], a: [2] },
     { v: 4, q: "Which two operations are controlled by consistency groups?", o: ["Compression", "Splitting", "Snapshot", "Synchronization", "Encryption"], a: [1, 3] },
     { v: 4, q: "What happens in snapshot rollback?", o: ["Data is restored to snapshot time", "Data is deleted", "Storage is reinitialized", "Cache is flushed"], a: [0] },
@@ -130,8 +129,10 @@ const questionsDB = [
     { v: 4, q: "What is a snapshot according to SNIA?", o: ["Remote mirror", "Encrypted replica", "Full physical backup", "Compressed data copy", "An available copy of specified data at a point in time"], a: [4] },
     { v: 4, q: "Which metric is controlled by SmartQoS?", o: ["RAID type", "Encryption level", "File format", "IOPS", "Temperature"], a: [3] },
     { v: 4, q: "SmartMigration ensures service continuity during:", o: ["Data migration", "Backup", "Encryption", "RAID rebuild", "Snapshot"], a: [0] },
+    { v: 4, q: "Which ITIL process controls and approves infrastructure changes?", o: ["Configuration Management", "Event Management", "Change Management", "Release Management", "Problem Management"], a: [2] },
+    { v: 4, q: "Which three functions does HyperClone support?", o: ["Encryption", "Backup", "Data reproduction", "Load balancing", "Data analysis", "Network routing"], a: [1, 2, 4] },
 
-    // --- ВАРИАНТ 5 (29 вопросов) ---
+    // --- ВАРИАНТ 5 (31 вопрос) ---
     { v: 5, q: "Which three SmartTier key technologies are commonly included?", o: ["Migration policy formulation", "Initial data placement (cold start)", "Monitoring statistics analysis", "Cache mirroring"], a: [0, 1, 2] },
     { v: 5, q: "Which feature allows HyperClone LUNs to be separated without downtime?", o: ["Online splitting", "Data migration", "RAID split", "Snapshot"], a: [0] },
     { v: 5, q: "Which SmartCompression mode compresses data before disk write?", o: ["Archive", "Offline", "Inline", "Post-process"], a: [2] },
@@ -161,8 +162,10 @@ const questionsDB = [
     { v: 5, q: "Which topology sends backup data over SAN?", o: ["LAN-Based", "Archive", "LAN-Free", "Cloud", "File-level"], a: [2] },
     { v: 5, q: "Which factors affect DR design? (Choose TWO)", o: ["RTO requirements", "Keyboard type", "Screen resolution", "Distance between sites", "Mouse sensitivity"], a: [0, 3] },
     { v: 5, q: "Which are key DR metrics? (Choose THREE)", o: ["FPS", "DPI", "RTO", "RPO", "SLA"], a: [2, 3, 4] },
+    { v: 5, q: "What happens after a DR failover?", o: ["Replication stops forever", "Services run on DR site", "Users lose access", "Backup is deleted", "Data is archived"], a: [1] },
+    { v: 5, q: "What is deduplication used for?", o: ["Copy snapshots", "Increase bandwidth", "Encrypt data", "Remove duplicate data", "Compress files"], a: [3] },
 
-    // --- ВАРИАНТ 6 (29 вопросов) ---
+    // --- ВАРИАНТ 6 (31 вопрос) ---
     { v: 6, q: "Which DR modes exist? (Choose TWO)", o: ["Active-Active", "Active-Passive", "Differential", "Snapshot", "Incremental"], a: [0, 1] },
     { v: 6, q: "Archive systems focus on long-term data storage.", o: ["True", "False"], a: [0] },
     { v: 6, q: "Which characteristics of backup systems? (Choose TWO)", o: ["Zero downtime", "Automatic service takeover", "Data copy storage", "Real-time replication", "Historical data recovery"], a: [2, 4] },
@@ -204,5 +207,6 @@ const questionsDB = [
     { v: 6, q: "Which DR architectures exist? (Choose THREE)", o: ["Active-Active", "Active-Passive", "Snapshot", "Incremental", "Geo-redundant"], a: [0, 1, 4] },
     { v: 6, q: "Geo-redundant DR protects against site-level disasters.", o: ["True", "False"], a: [0] },
     { v: 6, q: "DR systems eliminate the need for backup.", o: ["True", "False"], a: [1] },
-    { v: 6, q: "Backup and DR have the same purpose.", o: ["True", "False"], a: [1] }
+    { v: 6, q: "Backup and DR have the same purpose.", o: ["True", "False"], a: [1] },
+    { v: 6, q: "Which steps are part of Change Management? (Choose THREE)", o: ["Incident recovery", "RFC submission", "Alarm masking", "Change approval", "Disk replacement", "Change review"], a: [1, 3, 5] }
 ];
