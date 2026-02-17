@@ -51,9 +51,16 @@ function renderQuestion() {
         codeCont.classList.add('hidden');
     }
 
-    // Рандомизация вариантов
-    const optionsWithIndices = q.options.map((text, index) => ({ text, isOriginalCorrect: index === q.correct }));
+    // ЛОГИКА РАНДОМИЗАЦИИ ВАРИАНТОВ
+    // Создаем массив объектов {текст, метка_правильности}
+    const optionsWithIndices = q.options.map((text, index) => ({
+        text,
+        isOriginalCorrect: index === q.correct
+    }));
+
+    // Перемешиваем
     currentShuffledOptions = shuffle([...optionsWithIndices]);
+    // Находим новый индекс правильного ответа
     correctShuffledIdx = currentShuffledOptions.findIndex(o => o.isOriginalCorrect);
 
     const optCont = document.getElementById('options-container');
@@ -75,13 +82,12 @@ function renderQuestion() {
 }
 
 function selectOpt(idx, el) {
-    // В режиме обучения предотвращаем повторный выбор на том же вопросе
     if (answered && mode === 'training') return;
 
     answered = true;
     const isCorrect = idx === correctShuffledIdx;
 
-    // Сохраняем результат
+    // Сохраняем для финального отчета
     userAns[currentQ] = {
         selectedIdx: idx,
         correctIdx: correctShuffledIdx,
@@ -97,12 +103,12 @@ function selectOpt(idx, el) {
             showFeedback("Правильно!", true);
         } else {
             el.classList.add('wrong');
-            // Обязательно подсвечиваем правильный вариант зеленым
+            // При ошибке всегда подсвечиваем правильный
             allBtns[correctShuffledIdx].classList.add('correct');
             showFeedback("Ошибка!", false);
         }
     } else {
-        // В режиме экзамена просто убираем старые выделения и ставим новое
+        // Экзамен: просто выделяем выбранное
         allBtns.forEach(b => b.classList.remove('selected'));
         el.classList.add('selected');
     }
@@ -117,7 +123,7 @@ function showFeedback(txt, ok) {
 
 function handleNext() {
     if (!answered) {
-        alert("Выберите вариант!");
+        alert("Выберите вариант ответа!");
         return;
     }
     if (currentQ < activeQuestions.length - 1) {
@@ -138,7 +144,7 @@ function showResults() {
     document.getElementById('final-score').innerText = `${score} / ${activeQuestions.length}`;
 
     const review = document.getElementById('review-container');
-    review.innerHTML = '';
+    review.innerHTML = '<h3 class="font-bold text-slate-800 mb-4 uppercase tracking-tighter italic text-sm">Разбор ваших ответов:</h3>';
 
     activeQuestions.forEach((q, i) => {
         const data = userAns[i];

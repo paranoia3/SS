@@ -13,9 +13,9 @@
     <!-- Стартовый экран -->
     <div id="setup-screen" class="screen fade-in">
         <header class="header-content">
-            <span class="badge">Numerical Analysis Prep</span>
+            <span class="badge">Numerical Analysis Exam Prep</span>
             <h1>Numerical Methods</h1>
-            <p>База из 65 вопросов. Выберите вариант и режим для начала.</p>
+            <p>База из 65 уникальных вопросов. Выберите вариант и режим для тренировки.</p>
         </header>
 
         <div class="mode-selection-grid">
@@ -25,9 +25,10 @@
                     <span class="mode-icon">📖</span>
                     <h3>Обучение</h3>
                 </div>
+                <p class="mode-desc">Результат виден сразу. Идеально для запоминания теории.</p>
                 <div class="variant-btns">
-                    <button onclick="startQuiz('training', 1)" class="variant-btn">Вариант 1</button>
-                    <button onclick="startQuiz('training', 2)" class="variant-btn">Вариант 2</button>
+                    <button onclick="startQuiz('training', 1)" class="variant-btn">Вариант 1 (1-32)</button>
+                    <button onclick="startQuiz('training', 2)" class="variant-btn">Вариант 2 (33-65)</button>
                 </div>
             </div>
 
@@ -37,9 +38,10 @@
                     <span class="mode-icon">🎯</span>
                     <h3>Экзамен</h3>
                 </div>
+                <p class="mode-desc">Результаты и ошибки — только в самом конце теста.</p>
                 <div class="variant-btns">
-                    <button onclick="startQuiz('exam', 1)" class="variant-btn">Вариант 1</button>
-                    <button onclick="startQuiz('exam', 2)" class="variant-btn">Вариант 2</button>
+                    <button onclick="startQuiz('exam', 1)" class="variant-btn">Вариант 1 (1-32)</button>
+                    <button onclick="startQuiz('exam', 2)" class="variant-btn">Вариант 2 (33-65)</button>
                 </div>
             </div>
         </div>
@@ -52,7 +54,7 @@
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
                 <span>МЕНЮ</span>
             </button>
-            <div id="mode-indicator" class="tag">РЕЖИМ: ОБУЧЕНИЕ</div>
+            <div id="mode-indicator" class="tag shadow-sm">РЕЖИМ: ОБУЧЕНИЕ</div>
         </nav>
 
         <main class="quiz-card glass">
@@ -71,7 +73,7 @@
                 <div id="options-container" class="options-grid"></div>
 
                 <footer class="card-footer">
-                    <div id="feedback" class="feedback-label">Excellent!</div>
+                    <div id="feedback" class="feedback-label">Correct!</div>
                     <button id="next-btn" onclick="handleNext()" class="btn-next">СЛЕДУЮЩИЙ →</button>
                 </footer>
             </div>
@@ -83,13 +85,13 @@
         <div class="result-card glass">
             <div class="result-header">
                 <div class="icon-win">🏆</div>
-                <h2>Результаты</h2>
+                <h2>Ваш результат</h2>
                 <div id="final-score" class="final-score">0 / 32</div>
             </div>
 
             <div id="review-container" class="review-scroll"></div>
 
-            <button onclick="location.reload()" class="btn-restart">ВЕРНУТЬСЯ В МЕНЮ</button>
+            <button onclick="location.reload()" class="btn-restart shadow-lg">ВЕРНУТЬСЯ В МЕНЮ</button>
         </div>
     </div>
 </div>
