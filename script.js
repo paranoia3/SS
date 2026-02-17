@@ -7,7 +7,7 @@ let answered = false;
 let currentShuffledOptions = [];
 let correctShuffledIdx = -1;
 
-// Перемешивание (Fisher-Yates)
+// Фишер-Йейтс для перемешивания
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -22,15 +22,14 @@ function startQuiz(m, variant) {
     currentQ = 0;
     userAns = [];
 
-    // Делим 65 вопросов на 2 варианта (~32 и ~33)
-    const mid = Math.ceil(questions.length / 2);
+    // Разделение по вариантам (32 и 33)
+    const mid = 32;
     activeQuestions = (variant === 1) ? questions.slice(0, mid) : questions.slice(mid);
 
     document.getElementById('setup-screen').classList.add('hidden');
     document.getElementById('quiz-screen').classList.remove('hidden');
     document.getElementById('mode-indicator').innerText = `РЕЖИМ: ${m === 'training' ? 'ОБУЧЕНИЕ' : 'ЭКЗАМЕН'} (ВАР. ${variant})`;
 
-    // Прокрутка вверх при старте
     window.scrollTo(0, 0);
     renderQuestion();
 }
@@ -53,9 +52,9 @@ function renderQuestion() {
     }
 
     // Рандомизация вариантов
-    const optionsWithIndices = q.options.map((text, index) => ({ text, isCorrect: index === q.correct }));
+    const optionsWithIndices = q.options.map((text, index) => ({ text, isOriginalCorrect: index === q.correct }));
     currentShuffledOptions = shuffle([...optionsWithIndices]);
-    correctShuffledIdx = currentShuffledOptions.findIndex(o => o.isCorrect);
+    correctShuffledIdx = currentShuffledOptions.findIndex(o => o.isOriginalCorrect);
 
     const optCont = document.getElementById('options-container');
     optCont.innerHTML = '';
@@ -71,16 +70,18 @@ function renderQuestion() {
         optCont.appendChild(btn);
     });
 
-    // Плавный скролл к началу вопроса
     window.scrollTo({ top: 0, behavior: 'smooth' });
     document.getElementById('next-btn').innerText = currentQ === activeQuestions.length - 1 ? 'ФИНИШ' : 'ДАЛЕЕ →';
 }
 
 function selectOpt(idx, el) {
+    // В режиме обучения предотвращаем повторный выбор на том же вопросе
     if (answered && mode === 'training') return;
-    answered = true;
 
-    // Сохраняем данные для разбора
+    answered = true;
+    const isCorrect = idx === correctShuffledIdx;
+
+    // Сохраняем результат
     userAns[currentQ] = {
         selectedIdx: idx,
         correctIdx: correctShuffledIdx,
@@ -90,16 +91,18 @@ function selectOpt(idx, el) {
     const allBtns = document.querySelectorAll('.option-btn');
 
     if (mode === 'training') {
-        if (idx === correctShuffledIdx) {
+        if (isCorrect) {
             el.classList.add('correct');
             score++;
-            showFeedback("Верно!", true);
+            showFeedback("Правильно!", true);
         } else {
             el.classList.add('wrong');
+            // Обязательно подсвечиваем правильный вариант зеленым
             allBtns[correctShuffledIdx].classList.add('correct');
             showFeedback("Ошибка!", false);
         }
     } else {
+        // В режиме экзамена просто убираем старые выделения и ставим новое
         allBtns.forEach(b => b.classList.remove('selected'));
         el.classList.add('selected');
     }
