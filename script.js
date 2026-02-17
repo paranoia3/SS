@@ -7,7 +7,6 @@ let answered = false;
 let currentShuffledOptions = [];
 let correctShuffledIdx = -1;
 
-// Фишер-Йейтс для перемешивания
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -22,18 +21,14 @@ function startQuiz(m, variant) {
     currentQ = 0;
     userAns = [];
 
-    // Логика разделения на 2 варианта
-    // Всего 55 вопросов. Делим пополам (28 и 27)
-    const splitIndex = 28;
+    // Логика разделения: 76 вопросов пополам = 38
+    const splitIndex = 38;
 
     if (variant === 1) {
-        // Вопросы с 1 по 28 (индексы 0..27)
         activeQuestions = questions.slice(0, splitIndex);
     } else if (variant === 2) {
-        // Вопросы с 29 по 55 (индексы 28..конец)
         activeQuestions = questions.slice(splitIndex);
     } else {
-        // На всякий случай, если вариант не указан
         activeQuestions = questions;
     }
 
@@ -62,7 +57,7 @@ function renderQuestion() {
         codeCont.classList.add('hidden');
     }
 
-    // ЛОГИКА РАНДОМИЗАЦИИ ВАРИАНТОВ
+    // Рандомизация вариантов
     const optionsWithIndices = q.options.map((text, index) => ({
         text,
         isOriginalCorrect: index === q.correct
@@ -85,7 +80,7 @@ function renderQuestion() {
         optCont.appendChild(btn);
     });
 
-    // --- KaTeX Rendering Trigger ---
+    // KaTeX Render
     if (window.renderMathInElement) {
         renderMathInElement(document.getElementById('quiz-screen'), {
             delimiters: [
