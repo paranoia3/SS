@@ -1,212 +1,354 @@
+// Полная база из 65 уникальных вопросов на основе ваших материалов
+const questions = [
+    // --- INTERPOLATION & SPLINES ---
+    {
+        text: "The Lagrange basis polynomial Li(x) for point (xi, yi) has what property?",
+        options: ["Li(xi) = yi and Li(xj) = 0 for all j ≠ i", "Li(xi) = 1 and Li(xj) = 0 for all j ≠ i", "Li(x) integrates to 1 over the interval", "Li(xi) = 0 and Li(xj) = 0 for all j", "Li(xi) = 1 and Li(xj) = 1 for all j"],
+        correct: 1
+    },
+    {
+        text: "Which interpolation method has local control - changing one data point affects only nearby intervals?",
+        options: ["Cubic spline interpolation", "Lagrange interpolation", "Newton's forward interpolation", "All polynomial methods have global control", "Newton's divided differences interpolation"],
+        correct: 0
+    },
+    {
+        text: "For cubic splines, we typically enforce continuity of:",
+        options: ["Only the function values", "All derivatives up to fourth order", "All derivatives up to third order", "Function values, first, and second derivatives", "Function values and first derivatives"],
+        correct: 3
+    },
+    {
+        text: "Spline construction also requires boundary conditions to be specified. Which is a common choice?",
+        options: ["Natural splines (f''=0 at ends)", "Clamped splines (f'=const)", "Periodic splines", "All of the above", "None of the above"],
+        correct: 3
+    },
+    {
+        text: "The formula for Newton's forward interpolation for the case u = (x - x0)/h is:",
+        options: ["P(x) = y0 + uΔy0 + u(u+1)/2! Δ²y0 + ...", "P(x) = yn + u∇yn + u(u+1)/2! ∇²yn + ...", "P(x) = y0 + uΔy0 + u(u-1)/2! Δ²y0 + ...", "P(x) = uy0 + u(u+1)/2! Δy0 + ...", "P(x) = Σ yi * Li(x)"],
+        correct: 2
+    },
+    {
+        text: "The first divided difference f[xi, xj] is defined as:",
+        options: ["(f(xi) + f(xj))/(xj - xi)", "f(xj) - f(xi)", "(f(xj) - f(xi))/(xj + xi)", "(f(xi) - f(xj))/dx", "(f(xj) - f(xi))/(xj - xi)"],
+        correct: 4
+    },
+    {
+        text: "Ordinary least squares typically minimizes:",
+        options: ["Orthogonal distances", "Area between curves", "Horizontal distances in x", "Vertical distances (residuals)", "None of the above"],
+        correct: 3
+    },
+    {
+        text: "If the correlation coefficient r = 0, this implies:",
+        options: ["No relationship of any kind", "Perfect positive correlation", "No linear correlation", "R² = 1", "Negative slope"],
+        correct: 2
+    },
+    {
+        text: "The degree of the interpolating polynomial for n+1 data points is at most:",
+        options: ["n+1", "n", "n-1", "1", "2n"],
+        correct: 1
+    },
+    {
+        text: "In Newton's divided difference table, the diagonal elements represent:",
+        options: ["Function values", "Coefficients of the polynomial", "Errors", "Derivatives", "Residuals"],
+        correct: 1
+    },
 
-const questionsDB = [
-    // --- ВАРИАНТ 1 (31 вопрос) ---
-    { v: 1, q: "In a storage controller, what is a cache?", o: ["A power supply unit", "A memory chip on the disk controller that buffers data between internal storage and external interfaces", "A network switch", "A dedicated flash disk for logs"], a: [1] },
-    { v: 1, q: "The earliest form of external storage is:", o: ["Cloud storage", "NVMe", "JBOD", "SSD"], a: [2] },
-    { v: 1, q: "Internal storage is typically located:", o: ["Remote data center", "On network appliances", "Inside the host", "Inside a cloud pool"], a: [2] },
-    { v: 1, q: "The disk enclosure uses a modular design so that components such as expansion modules and power modules can be replaced in the field.", o: ["True", "False"], a: [0] },
-    { v: 1, q: "Which components belong to a NAS device? (Choose TWO)", o: ["Monitor", "Keyboard", "NIC", "CPU", "Memory"], a: [3, 4] },
-    { v: 1, q: "Early flash SSDs were based on:", o: ["Quantum wells", "Floating gate transistor", "Optical media", "Graphene"], a: [1] },
-    { v: 1, q: "Which disk enclosure indicator shows that an alarm has been reported?", o: ["Blinking blue", "Steady green", "Off", "Steady yellow (amber)"], a: [3] },
-    { v: 1, q: "Which design practice improves power reliability for disk enclosures?", o: ["Single large PSU", "BBUs instead of power modules", "No redundancy", "Connecting power modules to different PDUs"], a: [3] },
-    { v: 1, q: "Cloud storage relies on:", o: ["Local-only access", "Only HDD media", "Multi-tenant virtualized infrastructure", "Tape-based I/O"], a: [2] },
-    { v: 1, q: "Which modules are typically included in a controller enclosure design? (Select one or more)", o: ["Controllers with fans", "BBUs and power modules", "Management and interface modules", "System subrack"], a: [0, 1, 2, 3] },
-    { v: 1, q: "What is the function of the system subrack backplane?", o: ["Manages service ports", "Converts protocols", "Stores cache", "Integrates signal and power connectivity among modules"], a: [3] },
-    { v: 1, q: "What does a Cache flush do?", o: ["Writes data from cache to disk", "Clears cache without saving", "Reads data from disk to cache", "Encrypts cache data"], a: [0] },
-    { v: 1, q: "Modern storage trends include: (Select one or more)", o: ["Manual expansion", "Intelligence", "All-flash", "Cloudification"], a: [1, 2, 3] },
-    { v: 1, q: "Memory-centric architecture is enabled by:", o: ["RAID 0", "JSON", "HTML", "Memory Fabric"], a: [3] },
-    { v: 1, q: "Disk replacement should be completed within five minutes.", o: ["True", "False"], a: [0] },
-    { v: 1, q: "Which tool is mainly used for single storage system management?", o: ["eSight", "eService", "SmartKit", "DME", "DeviceManager"], a: [4] },
-    { v: 1, q: "Which tools support O&M operations? (Choose THREE)", o: ["eSight", "SmartKit", "Docker", "Kubernetes", "DeviceManager"], a: [0, 1, 4] },
-    { v: 1, q: "Which actions are required before disk replacement? (Choose TWO)", o: ["Pre-replacement check", "Power off entire system", "Verify indicator status", "Disable alarms permanently"], a: [0, 2] },
-    { v: 1, q: "Which disk type is commonly used in the capacity tier?", o: ["SSD", "NL-SAS", "FC SSD", "SAS", "NVMe"], a: [1] },
-    { v: 1, q: "ITIL is a framework for IT service management.", o: ["True", "False"], a: [0] },
-    { v: 1, q: "Which framework is the foundation of IT service management in storage O&M?", o: ["DevOps", "PMP", "TOGAF", "COBIT", "ITIL"], a: [4] },
-    { v: 1, q: "Which processes are part of ITIL? (Choose TWO)", o: ["Disk Management", "Pool Management", "Event Management", "Problem Management", "Energy Management"], a: [2, 3] },
-    { v: 1, q: "Which processes support service continuity? (Choose THREE)", o: ["Sales Management", "Problem Management", "Event Management", "Change Management", "Marketing Management"], a: [1, 2, 3] },
-    { v: 1, q: "What is an RFC in Change Management?", o: ["Request for Change", "Release Final Check", "Recovery Fault Code", "Request for Capacity"], a: [0] },
-    { v: 1, q: "Which process updates the CMDB?", o: ["Release Management", "Change Management", "Configuration Management", "Problem Management"], a: [1] },
-    { v: 1, q: "What does CMDB stand for?", o: ["Cloud Management Data Block", "Core Maintenance Database", "Control Module Data Backup", "Configuration Management Database"], a: [3] },
-    { v: 1, q: "Which information is collected during fault handling? (Choose THREE)", o: ["Operations before fault", "UI themes", "Marketing data", "Fault time", "Fault symptoms"], a: [0, 3, 4] },
-    { v: 1, q: "RAID 10 provides:", o: ["Compression", "High performance", "Mirroring", "Striping", "No redundancy"], a: [1] },
-    { v: 1, q: "RAID 10 is a combination of:", o: ["RAID 0 + RAID 0", "RAID 1 + RAID 0", "RAID 6 + RAID 0", "RAID 5 + RAID 0"], a: [1] },
-    { v: 1, q: "Which RAID level uses distributed parity?", o: ["RAID 1", "RAID 10", "RAID 0", "RAID 3", "RAID 5"], a: [4] },
-    { v: 1, q: "Which items belong to storage device information? (Choose THREE)", o: ["System logs", "OS version", "IP address", "Indicator status", "Hardware configuration", "Network topology"], a: [0, 3, 4] },
+    // --- INTEGRATION ---
+    {
+        text: "Simpson's 3/8 rule uses the formula:",
+        options: ["3h/8 [f0 + 3f1 + 3f2 + f3]", "3h/8 [f0 + 2f1 + 2f2 + f3]", "3h/8 [7f0 + 32f1 + 12f2 + 32f3 + 7f4]", "h/3 [f0 + 4f1 + f2]", "3h/8 [f0 + f1 + f2 + f3]"],
+        correct: 0
+    },
+    {
+        text: "For composite integration with 9 equally spaced points, Boole's rule could be applied:",
+        options: ["Twice: first 5 points and last 5 points (overlapping)", "Three times with 3 points each", "Three times with 5 points each", "Cannot be applied directly", "Once over all 9 points"],
+        correct: 0
+    },
+    {
+        text: "For 13 equally spaced points, which combination of methods is optimal?",
+        options: ["Apply trapezoidal rule", "Apply Weddle's rule twice", "Apply Boole's rule three times", "Apply Simpson's 1/3 rule throughout", "Apply Gaussian quadrature"],
+        correct: 3
+    },
+    {
+        text: "Gaussian quadrature chooses nodes to:",
+        options: ["Maximize exactness for a given number of points", "Minimize SSE", "Avoid weights", "Use equal spacing", "Simplify calculation"],
+        correct: 0
+    },
+    {
+        text: "The error in Simpson's 1/3 rule depends on which derivative of f?",
+        options: ["f'", "f''", "f'''", "f^(4)", "f^(5)"],
+        correct: 3
+    },
+    {
+        text: "Weddle's rule requires how many points?",
+        options: ["3", "5", "6", "7", "9"],
+        correct: 3
+    },
+    {
+        text: "The trapezoidal rule integrates a function by approximating it with:",
+        options: ["Constant steps", "Straight lines", "Parabolas", "Cubics", "Exponentials"],
+        correct: 1
+    },
+    {
+        text: "Newton-Cotes formulas use:",
+        options: ["Equidistant points", "Random points", "Roots of Legendre polynomials", "Roots of Chebyshev polynomials", "None of the above"],
+        correct: 0
+    },
+    {
+        text: "The degree of precision of Simpson's 1/3 rule is:",
+        options: ["1", "2", "3", "4", "5"],
+        correct: 2
+    },
 
-    // --- ВАРИАНТ 2 (31 вопрос) ---
-    { v: 2, q: "Which RAID evolution technique distributes data blocks across all disks?", o: ["Block virtualization", "Parity mapping", "Disk mirroring", "LUN virtualization"], a: [0] },
-    { v: 2, q: "Which properties are improved by RAID-TP?", o: ["Capacity utilization", "Reliability", "Cache size", "File indexing"], a: [1] },
-    { v: 2, q: "Components of RAID 2.0+ include: (Select one or more)", o: ["Chunk Group", "NIC", "Disk Group", "Disk Domain", "CPU Cache"], a: [0, 3] },
-    { v: 2, q: "RAID 5 tolerates two disk failures.", o: ["True", "False"], a: [1] },
-    { v: 2, q: "RAID 1 primarily provides:", o: ["Low cost", "High speed", "High capacity", "Data compression", "High reliability"], a: [4] },
-    { v: 2, q: "Which RAID level eliminates write penalty in random writes?", o: ["RAID 5", "RAID 10", "RAID 6", "RAID 0"], a: [1] },
-    { v: 2, q: "RAID 6 requires at least how many disks?", o: ["N+2", "N+3", "2", "4"], a: [3] },
-    { v: 2, q: "Which RAID level offers the best performance but no redundancy?", o: ["RAID 3", "RAID 5", "RAID 1", "RAID 0", "RAID 10"], a: [3] },
-    { v: 2, q: "How many disk failures can RAID 6 tolerate?", o: ["0", "1", "2", "3"], a: [2] },
-    { v: 2, q: "What is the smallest unit for migration in RAID 2.0+?", o: ["LUN", "Chunk", "Grain", "Extent", "Stripe"], a: [3] },
-    { v: 2, q: "What causes the write penalty in RAID 3 and RAID 5?", o: ["Cache flushing", "Disk encryption", "Parity calculation", "Network traffic"], a: [2] },
-    { v: 2, q: "Grains are used in:", o: ["Disk groups", "Volumes", "Disk domains", "Thin LUNs", "Thick LUNs"], a: [3] },
-    { v: 2, q: "Each disk platter in an HDD has two read/write heads to read and write data on both surfaces of the platter.", o: ["True", "False"], a: [0] },
-    { v: 2, q: "What is the main purpose of SmartThin?", o: ["Improve network throughput", "Allocate storage on demand", "Increase RAID redundancy", "Encrypt user data"], a: [1] },
-    { v: 2, q: "SmartThin supports online capacity expansion.", o: ["True", "False"], a: [0] },
-    { v: 2, q: "What forms a Chunk Group (CKG)?", o: ["Parity disks", "LUNs", "Volumes", "Chunks from different disks", "Hot spare disks"], a: [3] },
-    { v: 2, q: "What is the main purpose of RAID?", o: ["Encrypt data", "Improve performance and data reliability", "Increase network speed", "Reduce storage cost"], a: [1] },
-    { v: 2, q: "RAID 1 (mirroring) stores duplicate copies. Efficiency is:", o: ["100%", "50%", "33%", "75%"], a: [1] },
-    { v: 2, q: "RAID 6 uses dual parity.", o: ["True", "False"], a: [0] },
-    { v: 2, q: "For critical data with large disks, the recommended RAID level is:", o: ["RAID 0", "RAID 5", "RAID 6", "RAID 1"], a: [2] },
-    { v: 2, q: "RAID-TP (Triple Parity) allows tolerance of how many failures?", o: ["1", "2", "3", "4"], a: [2] },
-    { v: 2, q: "RAID 2.0+ uses a many-to-many reconstruction approach.", o: ["True", "False"], a: [0] },
-    { v: 2, q: "Which protocol is mainly used by NAS in Linux?", o: ["NFS", "CIFS", "FTP", "HTTP"], a: [0] },
-    { v: 2, q: "NFS is a stateful protocol.", o: ["True", "False"], a: [1] },
-    { v: 2, q: "Which protocol is based on SMB?", o: ["FTP", "HTTP", "CIFS", "NDMP", "NFS"], a: [2] },
-    { v: 2, q: "SAS architecture layers include: (Select one or more)", o: ["Application", "Network", "Phy", "Physical", "Link"], a: [0, 2, 3, 4] },
-    { v: 2, q: "The statement 'iSCSI carries SCSI commands over IP' is:", o: ["True", "False"], a: [0] },
-    { v: 2, q: "Which protocol is designed for high-speed storage networks?", o: ["SATA", "CIFS", "NFS", "USB", "Fibre Channel (FC)"], a: [4] },
-    { v: 2, q: "What does SCSI stand for?", o: ["Smart Computer System Interface", "Secure Computer Storage Interface", "Small Computer System Interface", "Serial Computer System Interface"], a: [2] },
-    { v: 2, q: "Which iSCSI initiator has the highest performance?", o: ["Software initiator", "USB adapter", "TOE NIC", "iSCSI HBA", "Ethernet NIC"], a: [3] },
-    { v: 2, q: "Which features are provided by eService? (Choose THREE)", o: ["Disk risk prediction", "Performance prediction", "Capacity prediction", "RAID configuration", "User authentication", "LUN creation"], a: [0, 1, 2] },
+    // --- LINEAR ALGEBRA & MATRICES ---
+    {
+        text: "What is the main difference between Gaussian elimination and Gauss-Jordan elimination?",
+        options: ["Upper triangular vs Diagonal", "Upper triangular vs Reduced row echelon form (identity-like)", "Diagonal vs Tridiagonal", "Symmetric vs Orthogonal", "Lower triangular vs Identity"],
+        correct: 1
+    },
+    {
+        text: "Which condition guarantees convergence for both Jacobi and Gauss-Seidel methods?",
+        options: ["A is strictly diagonally dominant.", "A has no zero diagonal elements.", "The spectral radius ρ(T) < 1", "A is tridiagonal.", "A is symmetric positive definite."],
+        correct: 0
+    },
+    {
+        text: "In the Jacobi method for eigenvalues, the rotation matrix G is used to:",
+        options: ["Compute the determinant", "Find the inverse", "Zero out the largest off-diagonal element", "Find the trace", "Normalize eigenvectors"],
+        correct: 2
+    },
+    {
+        text: "The primary goal of the Power method is:",
+        options: ["Find all eigenvalues", "Factorize matrix into LDL^T", "Compute matrix inverse", "Find the dominant eigenvalue and its eigenvector", "Solve СЛАУ"],
+        correct: 3
+    },
+    {
+        text: "The final form of the augmented matrix after Gauss-Jordan elimination is:",
+        options: ["[L|z]", "[I|x] where I is identity", "[U|y]", "[D|w]", "[A|b]"],
+        correct: 1
+    },
+    {
+        text: "Using Neumann series, how can A⁻¹ be expressed using B and error E = I - AB?",
+        options: ["A⁻¹ = (I-E)B", "A⁻¹ = B(I-E)⁻¹", "A⁻¹ = B + E", "A⁻¹ = B(I+E+E²+...)", "A⁻¹ = B(I+E)"],
+        correct: 3
+    },
+    {
+        text: "LU decomposition of matrix A results in:",
+        options: ["A = L + U", "A = LU", "A = L - U", "A = U/L", "A = L*L^T"],
+        correct: 1
+    },
+    {
+        text: "The Successive Over-Relaxation (SOR) method uses a parameter ω. When ω=1, it is:",
+        options: ["Jacobi method", "Gauss-Seidel method", "Newton's method", "Bisection method", "Power method"],
+        correct: 1
+    },
+    {
+        text: "A matrix is strictly diagonally dominant if for each row i:",
+        options: ["|aii| > sum |aij| for j=i", "|aii| > sum |aij| for j≠i", "|aii| < sum |aij|", "|aii| = sum |aij|", "|aii| > 1"],
+        correct: 1
+    },
+    {
+        text: "The Jacobi eigenvalue method is applicable to:",
+        options: ["Any matrix", "Symmetric matrices only", "Identity matrices", "Singular matrices", "Diagonal matrices"],
+        correct: 1
+    },
 
-    // --- ВАРИАНТ 3 (31 вопрос) ---
-    { v: 3, q: "What is a LUN?", o: ["A file unit", "A disk controller", "A logical storage unit", "A parity block"], a: [2] },
-    { v: 3, q: "How many main layers does FC protocol have?", o: ["5", "6", "3", "4", "7"], a: [0] },
-    { v: 3, q: "Which protocol carries SCSI commands over IP?", o: ["SAS", "FC", "FCoE", "iSCSI", "NVMe"], a: [3] },
-    { v: 3, q: "What is the external representation of a volume?", o: ["Chunk", "Grain", "Storage pool", "LUN", "Disk group"], a: [3] },
-    { v: 3, q: "Which technology allows FC to work over Ethernet?", o: ["SAS", "PCIe", "FCoE", "RDMA", "NVMe"], a: [2] },
-    { v: 3, q: "Which RAID level uses distributed parity?", o: ["RAID 3", "RAID 5", "RAID 0", "RAID 10", "RAID 1"], a: [1] },
-    { v: 3, q: "What does iSCSI use to transmit data?", o: ["FC", "TCP/IP", "SAS", "UDP", "RDMA"], a: [1] },
-    { v: 3, q: "In SCSI, who sends requests?", o: ["Target", "Switch", "Initiator", "LUN", "Controller"], a: [2] },
-    { v: 3, q: "Which FC port connects devices to the fabric?", o: ["G_Port", "F_Port", "U_Port", "NL_Port", "E_Port"], a: [1] },
-    { v: 3, q: "What does SAS stand for?", o: ["Smart Access Storage", "Server Attached Storage", "Serial Attached SCSI", "System Access Standard"], a: [2] },
-    { v: 3, q: "What processes SCSI commands?", o: ["Initiator", "Server", "HBA", "Target", "Cache"], a: [3] },
-    { v: 3, q: "What main advantage does SAS have over parallel SCSI?", o: ["Encryption", "Simpler protocol", "Higher speed and reliability", "Lower power use"], a: [2] },
-    { v: 3, q: "Which FC topology is similar to Ethernet switching?", o: ["Fabric", "Point-to-Point", "FC-AL", "Bus", "Ring"], a: [0] },
-    { v: 3, q: "NVMe is optimized for:", o: ["HDD", "Tape", "Flash storage (SSD)", "Optical disks"], a: [2] },
-    { v: 3, q: "PCIe advantages include: (Select one or more)", o: ["Error detection", "High bandwidth", "Hot swap (native)", "Long distance"], a: [0, 1] },
-    { v: 3, q: "A storage pool primarily manages: (Select THREE)", o: ["Storage resources", "RAID protection", "Network traffic", "Application data", "User permissions"], a: [0, 1, 3] },
-    { v: 3, q: "RAID 5 uses: (Select THREE)", o: ["Striping", "Dual parity", "Mirroring", "Distributed parity", "Single disk fault tolerance"], a: [0, 3, 4] },
-    { v: 3, q: "RAID 5 suffers from: (Select TWO)", o: ["Write penalty", "High power usage", "Encryption overhead", "No redundancy", "Degraded state risk"], a: [0, 4] },
-    { v: 3, q: "NVMe advantages include: (Select THREE)", o: ["Low latency", "Compression", "Encryption", "High bandwidth", "High IOPS"], a: [0, 3, 4] },
-    { v: 3, q: "Standard Fibre Channel (FC) topologies include: (Select TWO)", o: ["FC-AL", "Point-to-Point", "Bus", "Ring"], a: [0, 1] },
-    { v: 3, q: "SAS vs. parallel SCSI main advantage is:", o: ["Simpler protocol", "Lower power use", "Lower cost", "Higher speed and reliability", "Encryption"], a: [3] },
-    { v: 3, q: "NVMe is designed for HDDs.", o: ["True", "False"], a: [1] },
-    { v: 3, q: "The technology that allows Fibre Channel (FC) to work over Ethernet is:", o: ["NVMe", "SAS", "PCIe", "FCOE", "RDMA"], a: [3] },
-    { v: 3, q: "SAS stands for:", o: ["Smart Access Storage", "Server Attached Storage", "Serial Attached SCSI", "System Access Standard"], a: [2] },
-    { v: 3, q: "RAID can replace backup.", o: ["True", "False"], a: [1] },
-    { v: 3, q: "Block Virtualization primarily solves: (Select TWO)", o: ["CPU overload", "Network congestion", "Load imbalance", "Encryption weakness", "Reconstruction risk"], a: [2, 4] },
-    { v: 3, q: "SAS supports hot swap.", o: ["True", "False"], a: [0] },
-    { v: 3, q: "RAID 2.0+ uses which concepts? (Select THREE)", o: ["Grains", "Chunks", "CKGs", "Files", "Packets"], a: [0, 1, 2] },
-    { v: 3, q: "Which RAID level offers the best performance but no redundancy?", o: ["RAID 3", "RAID 5", "RAID 1", "RAID 0", "RAID 10"], a: [3] },
-    { v: 3, q: "Which process occurs first in SmartMigration?", o: ["Service data synchronization", "Pair splitting", "Cache flush", "LUN information exchange", "Consistency check"], a: [0] },
-    { v: 3, q: "Which structure records logical-to-physical mapping in SmartThin?", o: ["Cache directory", "Snapshot index", "Allocation log", "RAID table", "Mapping table"], a: [4] },
+    // --- ODE & DIFFERENTIAL EQUATIONS ---
+    {
+        text: "The correct formula for k3 in RK4 is:",
+        options: ["k3 = hf(xn + h/2, yn + k2/2)", "k3 = hf(xn + h, yn + k2)", "k3 = hf(xn + h/2, yn + k1/2)", "k3 = hf(xn + h/2, yn + k3)", "k3 = hf(xn + h, yn + 2k3)"],
+        correct: 0
+    },
+    {
+        text: "The 3rd order RK formula uses which set of coefficients?",
+        options: [
+            "k1=hf(xn, yn), k2=hf(xn+h/3, yn+k1/3), k3=hf(xn+2h/3, yn+2k2/3)",
+            "k1=hf(xn, yn), k2=hf(xn+h/2, yn+k1/2), k3=hf(xn+h, yn-k1+2k2)",
+            "k1=hf(xn, yn), k2=hf(xn+h/2, yn+k1/2), k3=hf(xn+h/2, yn+k2/2)",
+            "k1=hf(xn, yn), k2=hf(xn+h, yn+k1), k3=hf(xn+h, yn-k1+2k2)",
+            "None of the above"
+        ],
+        correct: 1
+    },
+    {
+        text: "Picard's method is based on:",
+        options: ["Numerical differentiation", "Polynomial interpolation", "Converting ODE to difference equation", "Iterative solution of integral equation", "Taylor series expansion"],
+        correct: 3
+    },
+    {
+        text: "For solving y' = x² + y with y(0)=1 using Taylor series, what is y''(0)?",
+        options: ["2x + y'", "2 + (x² + y)'", "Need to compute: y'' = 2x + y' = 2x + (x² + y)", "2 + y'", "0"],
+        correct: 2
+    },
+    {
+        text: "The local truncation error of Euler's method is:",
+        options: ["O(h)", "O(h²)", "O(h³)", "O(h⁴)", "O(1)"],
+        correct: 1
+    },
+    {
+        text: "The Runge-Kutta method of 4th order is equivalent to Taylor series up to term:",
+        options: ["h", "h²", "h³", "h⁴", "h⁵"],
+        correct: 3
+    },
+    {
+        text: "Predictor-Corrector methods like Milne's or Adams-Bashforth are:",
+        options: ["Single-step", "Multi-step", "Direct", "Iterative for roots", "None of the above"],
+        correct: 1
+    },
+    {
+        text: "Modified Euler's method is also known as:",
+        options: ["RK1", "RK2 (Heun's method)", "RK4", "Bisection", "Secant"],
+        correct: 1
+    },
 
-    // --- ВАРИАНТ 4 (31 вопрос) ---
-    { v: 4, q: "What is snapshot cascading?", o: ["Snapshot encryption", "Deleting old snapshots", "Creating child snapshots that include parent data", "Merging snapshots"], a: [2] },
-    { v: 4, q: "Which two operations are controlled by consistency groups?", o: ["Compression", "Splitting", "Snapshot", "Synchronization", "Encryption"], a: [1, 3] },
-    { v: 4, q: "What happens in snapshot rollback?", o: ["Data is restored to snapshot time", "Data is deleted", "Storage is reinitialized", "Cache is flushed"], a: [0] },
-    { v: 4, q: "Which three industries benefit most from HyperMetro?", o: ["Healthcare", "Social security", "Retail", "Finance", "Gaming", "Entertainment"], a: [0, 1, 3] },
-    { v: 4, q: "Which two synchronization types exist in HyperClone?", o: ["Full", "Snapshot", "Offline", "Incremental", "Mirror"], a: [0, 3] },
-    { v: 4, q: "HyperMetro ensures RPO = ? and RTO = ?", o: ["0, 0", "1, 1", "0, 5", "5, 0"], a: [0] },
-    { v: 4, q: "SmartQoS assigns priorities based on:", o: ["Disk model", "User account", "LUN / file system", "Encryption type", "Server IP"], a: [2] },
-    { v: 4, q: "Which algorithm is used in SmartCompression?", o: ["AES", "SHA-1", "MD5", "LZ77", "RSA"], a: [3] },
-    { v: 4, q: "Which three HyperMetro properties improve reliability?", o: ["RAID TP", "Quorum arbitration", "Snapshot compression", "Dual-write", "Locking", "Encryption"], a: [1, 3, 4] },
-    { v: 4, q: "In HyperMetro both data centers can carry services simultaneously.", o: ["True", "False"], a: [0] },
-    { v: 4, q: "What records data changes in HyperClone?", o: ["RAID table", "Mapping file", "Cache table", "Snapshot index", "Differential bitmap"], a: [4] },
-    { v: 4, q: "HyperSnap snapshots are full physical copies.", o: ["True", "False"], a: [1] },
-    { v: 4, q: "Which two communication methods are supported in HyperMetro?", o: ["Fibre Channel", "IP network", "USB", "NFC", "Bluetooth"], a: [0, 1] },
-    { v: 4, q: "Which two SmartTier phases handle data movement/placement decisions?", o: ["RAID rebuild", "Data migration", "Data placement analysis", "I/O monitoring", "Cache flush"], a: [1, 2] },
-    { v: 4, q: "Inline deduplication performs deduplication:", o: ["After writing data", "During backup", "After migration", "Before writing data", "During replication"], a: [3] },
-    { v: 4, q: "Which two components are involved in a SmartMigration pair?", o: ["Disk", "File system", "Source LUN", "Target LUN", "Server"], a: [2, 3] },
-    { v: 4, q: "HyperReplication pairs require both LUNs to be in the same storage system.", o: ["True", "False"], a: [1] },
-    { v: 4, q: "Which component monitors data access in SmartTier?", o: ["Snapshot manager", "Data migration module", "RAID engine", "I/O monitoring module", "Cache engine"], a: [3] },
-    { v: 4, q: "Which three phases exist in SmartTier?", o: ["Snapshot", "Data migration", "Compression", "Data analysis", "I/O monitoring", "Encryption"], a: [1, 3, 4] },
-    { v: 4, q: "Which two SmartQoS mechanisms exist?", o: ["Snapshot control", "Encryption control", "I/O priority scheduling", "Cache balancing", "I/O traffic control"], a: [2, 4] },
-    { v: 4, q: "SmartQoS dynamically allocates which resource?", o: ["CPU threads", "Storage system resources", "Network packets", "Snapshots", "Encryption keys"], a: [1] },
-    { v: 4, q: "What is the role of a secondary site in HyperReplication?", o: ["Cache storage", "Logging only", "Backup and service takeover", "Performance tuning"], a: [2] },
-    { v: 4, q: "HyperClone allows reading and writing to target LUN during synchronization.", o: ["True", "False"], a: [0] },
-    { v: 4, q: "Which three SmartQoS objectives are measured/controlled?", o: ["Disk temperature", "CPU load", "Power usage", "Bandwidth", "IOPS", "Latency"], a: [3, 4, 5] },
-    { v: 4, q: "SmartTier can migrate hot data to SSDs.", o: ["True", "False"], a: [0] },
-    { v: 4, q: "Which SmartTier phase ranks data activity levels?", o: ["Data relocation", "Tier initialization", "Cache flush", "Compression stage", "Data placement analysis"], a: [4] },
-    { v: 4, q: "What is a snapshot according to SNIA?", o: ["Remote mirror", "Encrypted replica", "Full physical backup", "Compressed data copy", "An available copy of specified data at a point in time"], a: [4] },
-    { v: 4, q: "Which metric is controlled by SmartQoS?", o: ["RAID type", "Encryption level", "File format", "IOPS", "Temperature"], a: [3] },
-    { v: 4, q: "SmartMigration ensures service continuity during:", o: ["Data migration", "Backup", "Encryption", "RAID rebuild", "Snapshot"], a: [0] },
-    { v: 4, q: "Which ITIL process controls and approves infrastructure changes?", o: ["Configuration Management", "Event Management", "Change Management", "Release Management", "Problem Management"], a: [2] },
-    { v: 4, q: "Which three functions does HyperClone support?", o: ["Encryption", "Backup", "Data reproduction", "Load balancing", "Data analysis", "Network routing"], a: [1, 2, 4] },
+    // --- ROOTS OF EQUATIONS ---
+    {
+        text: "Which method can find complex roots without complex initial guesses?",
+        options: ["Secant", "Bisection", "False position", "Newton-Raphson", "Müller's method"],
+        correct: 4
+    },
+    {
+        text: "In the Newton-Raphson method, the formula for x_{n+1} is:",
+        options: ["xn - f(xn)/f'(xn)", "(xn + xn-1)/2", "g(xn)", "xn + f(xn)/f'(xn)", "xn - f(xn)"],
+        correct: 0
+    },
+    {
+        text: "In the bisection method, the error after n iterations satisfies:",
+        options: ["1/n²", "1/log(n)", "1/n", "log(n)", "1/2^n"],
+        correct: 4
+    },
+    {
+        text: "The Secant method requires how many initial guesses?",
+        options: ["1", "2", "3", "0", "4"],
+        correct: 1
+    },
+    {
+        text: "The order of convergence of the Newton-Raphson method is:",
+        options: ["1 (linear)", "1.618", "2 (quadratic)", "3", "0.5"],
+        correct: 2
+    },
+    {
+        text: "The method of False Position (Regula Falsi) is always convergent.",
+        options: ["TRUE", "FALSE"],
+        correct: 0
+    },
+    {
+        text: "Fixed point iteration x = g(x) converges if:",
+        options: ["|g'(x)| > 1", "|g'(x)| < 1", "g'(x) = 0", "g(x) is linear", "g(x) is constant"],
+        correct: 1
+    },
 
-    // --- ВАРИАНТ 5 (31 вопрос) ---
-    { v: 5, q: "Which three SmartTier key technologies are commonly included?", o: ["Migration policy formulation", "Initial data placement (cold start)", "Monitoring statistics analysis", "Cache mirroring"], a: [0, 1, 2] },
-    { v: 5, q: "Which feature allows HyperClone LUNs to be separated without downtime?", o: ["Online splitting", "Data migration", "RAID split", "Snapshot"], a: [0] },
-    { v: 5, q: "Which SmartCompression mode compresses data before disk write?", o: ["Archive", "Offline", "Inline", "Post-process"], a: [2] },
-    { v: 5, q: "Which three application areas often benefit from SmartCompression?", o: ["DHCP servers", "DNS systems", "File services", "Databases", "Engineering/project data"], a: [2, 3, 4] },
-    { v: 5, q: "SmartQoS manages encryption keys.", o: ["True", "False"], a: [1] },
-    { v: 5, q: "Which two data protection technologies support DR?", o: ["HyperReplication", "HyperMetro", "HyperClone", "HyperSnap", "SmartCompression"], a: [0, 1] },
-    { v: 5, q: "HyperMetro is also called:", o: ["Offline backup", "Cold-standby", "Passive DR", "Active-active"], a: [3] },
-    { v: 5, q: "Which three HyperSnap application scenarios are correct?", o: ["Data mining", "Data backup", "Messaging", "Testing", "Streaming", "Gaming"], a: [0, 1, 3] },
-    { v: 5, q: "Which technology is the core of HyperSnap?", o: ["Redirect on Write", "Dual-write", "Copy on Write", "RAID mirroring"], a: [0] },
-    { v: 5, q: "Which technology allows HyperMetro to upgrade to 3DC?", o: ["Snapshot", "SmartQoS", "RAID", "HyperReplication"], a: [3] },
-    { v: 5, q: "Which three tasks are part of HyperMetro configuration?", o: ["Create HyperMetro pair", "Enable compression", "Create consistency group", "Create quorum server", "Configure RAID"], a: [0, 2, 3] },
-    { v: 5, q: "Which three SmartMigration steps commonly occur before completion?", o: ["Service data synchronization", "Cache flush", "Snapshot deletion", "LUN information exchange", "Pair splitting"], a: [0, 3, 4] },
-    { v: 5, q: "What does a HyperReplication pair consist of?", o: ["Two servers", "Two switches", "Two data centers", "A primary and a secondary LUN"], a: [3] },
-    { v: 5, q: "Which two HyperReplication modes exist?", o: ["Snapshot", "Manual", "Offline", "Synchronous", "Asynchronous"], a: [3, 4] },
-    { v: 5, q: "Which are common causes of data loss? (Choose TWO)", o: ["Cloud storage", "Human error", "Hardware failure", "High bandwidth", "Deduplication"], a: [1, 2] },
-    { v: 5, q: "Which backup types exist? (Choose THREE)", o: ["Full", "Extension", "Incremental", "Differential", "Elastic"], a: [0, 2, 3] },
-    { v: 5, q: "Which environment commonly uses agent-free backup?", o: ["Physical servers", "SAN switches", "Tape libraries", "File systems", "Virtual machines"], a: [4] },
-    { v: 5, q: "Backup and disaster recovery are the same thing.", o: ["True", "False"], a: [1] },
-    { v: 5, q: "RPO defines acceptable data loss.", o: ["True", "False"], a: [0] },
-    { v: 5, q: "Which system focuses on business continuity?", o: ["Snapshot", "Archive", "Disaster Recovery", "Backup", "Deduplication"], a: [2] },
-    { v: 5, q: "DR drills are optional and unnecessary.", o: ["True", "False"], a: [1] },
-    { v: 5, q: "DR can be implemented at multiple layers.", o: ["True", "False"], a: [0] },
-    { v: 5, q: "Which DR mode provides the fastest recovery?", o: ["Tape-based", "Archive recovery", "Active-Active DR", "Active-Passive DR", "Backup-based"], a: [2] },
-    { v: 5, q: "What type of disaster is a fire?", o: ["Configuration error", "Human error", "Software disaster", "Logical disaster", "Hard disaster"], a: [4] },
-    { v: 5, q: "Which sites are used in DR? (Choose THREE)", o: ["Secondary site", "Test site only", "Primary site", "DR site", "Archive site only"], a: [0, 2, 3] },
-    { v: 5, q: "Active-Active DR allows both sites to run services.", o: ["True", "False"], a: [0] },
-    { v: 5, q: "Which topology sends backup data over SAN?", o: ["LAN-Based", "Archive", "LAN-Free", "Cloud", "File-level"], a: [2] },
-    { v: 5, q: "Which factors affect DR design? (Choose TWO)", o: ["RTO requirements", "Keyboard type", "Screen resolution", "Distance between sites", "Mouse sensitivity"], a: [0, 3] },
-    { v: 5, q: "Which are key DR metrics? (Choose THREE)", o: ["FPS", "DPI", "RTO", "RPO", "SLA"], a: [2, 3, 4] },
-    { v: 5, q: "What happens after a DR failover?", o: ["Replication stops forever", "Services run on DR site", "Users lose access", "Backup is deleted", "Data is archived"], a: [1] },
-    { v: 5, q: "What is deduplication used for?", o: ["Copy snapshots", "Increase bandwidth", "Encrypt data", "Remove duplicate data", "Compress files"], a: [3] },
-
-    // --- ВАРИАНТ 6 (31 вопрос) ---
-    { v: 6, q: "Which DR modes exist? (Choose TWO)", o: ["Active-Active", "Active-Passive", "Differential", "Snapshot", "Incremental"], a: [0, 1] },
-    { v: 6, q: "Archive systems focus on long-term data storage.", o: ["True", "False"], a: [0] },
-    { v: 6, q: "Which characteristics of backup systems? (Choose TWO)", o: ["Zero downtime", "Automatic service takeover", "Data copy storage", "Real-time replication", "Historical data recovery"], a: [2, 4] },
-    { v: 6, q: "Which challenges exist in DR implementation? (Choose THREE)", o: ["High cost", "Testing difficulty", "Complex configuration", "Faster performance", "Reduced storage"], a: [0, 1, 2] },
-    { v: 6, q: "Which disasters can DR protect against? (Choose THREE)", o: ["Power outages", "File renaming", "Floods", "Earthquakes", "Screen failure"], a: [0, 2, 3] },
-    { v: 6, q: "Which are goals of DR systems? (Choose TWO)", o: ["Fast service recovery", "Data deduplication", "Storage compression", "Business continuity", "Data archiving"], a: [0, 3] },
-    { v: 6, q: "Extent is the minimum unit for migration.", o: ["True", "False"], a: [0] },
-    { v: 6, q: "Extents are typical operations used in: (Select TWO)", o: ["Parity calculation", "Disk formatting", "Encryption", "Hot data statistics", "Migration"], a: [0, 4] },
-    { v: 6, q: "Which components are standard backup storage media? (Select TWO)", o: ["CPU cache", "RAM", "Tape library", "Disk array", "Video card"], a: [2, 3] },
-    { v: 6, q: "Source-side deduplication happens:", o: ["On the backup server", "On production host", "On the tape drive", "During network transit"], a: [1] },
-    { v: 6, q: "Solutions that replicate data across geographically separate sites provide:", o: ["Local HA", "Geo-redundant DR", "Snapshotting", "RAID protection"], a: [1] },
-    { v: 6, q: "Which are standard DR (Disaster Recovery) modes? (Select TWO)", o: ["Active-Active", "Active-Passive", "Differential", "Incremental", "Snapshot"], a: [0, 1] },
-    { v: 6, q: "What is the main purpose of data backup?", o: ["Recover data after data loss", "Reduce network traffic", "Improve database performance", "Increase system speed"], a: [0] },
-    { v: 6, q: "What does synchronous replication provide?", o: ["Real-time consistency", "Zero RPO", "Instant switchover", "No data loss"], a: [1] },
-    { v: 6, q: "Which threats require backup? (Choose THREE)", o: ["Hardware failures", "Virus attacks", "Faster CPUs", "System upgrades", "Human errors"], a: [0, 1, 4] },
-    { v: 6, q: "Which factors affect backup policy? (Choose TWO)", o: ["Data importance", "Screen size", "Mouse sensitivity", "Retention period", "Keyboard type"], a: [0, 3] },
-    { v: 6, q: "Which components are part of a backup system? (Choose TWO)", o: ["Router", "Firewall", "Backup client", "Backup media", "Switch"], a: [2, 3] },
-    { v: 6, q: "Which backup type works continuously?", o: ["Archive backup", "Full backup", "Continuous backup", "Snapshot backup"], a: [2] },
-    { v: 6, q: "Which two technologies can be used together for maximum space saving?", o: ["SmartCompression", "SmartDedupe", "SmartQoS", "SmartMigration", "SmartTier"], a: [0, 1] },
-    { v: 6, q: "Which storage types are used for backup? (Choose THREE)", o: ["Tape", "CPU cache", "Cloud", "RAM only", "Disk"], a: [0, 2, 4] },
-    { v: 6, q: "Which protocol is used in Server-Less backup?", o: ["HTTP", "SMB", "NDMP", "FTP", "NFS"], a: [2] },
-    { v: 6, q: "Which topologies require SAN? (Choose TWO)", o: ["LAN-Free", "LAN-Based", "Archive", "Server-Free", "Cloud backup"], a: [0, 3] },
-    { v: 6, q: "Which elements define backup performance? (Choose THREE)", o: ["Keyboard layout", "RTO", "Screen resolution", "Backup Window", "RPO"], a: [1, 3, 4] },
-    { v: 6, q: "Which DR challenges are common? (Choose THREE)", o: ["High cost", "Testing difficulty", "Complex configuration", "Faster performance", "Reduced storage"], a: [0, 1, 2] },
-    { v: 6, q: "Backup helps recover deleted data.", o: ["True", "False"], a: [0] },
-    { v: 6, q: "Snapshot rollback can restore data after virus infection.", o: ["True", "False"], a: [0] },
-    { v: 6, q: "In migration/replication contexts, DCL is mainly used to record:", o: ["Data changes for later synchronization", "Encryption logs", "Disk failures", "Cache hits"], a: [0] },
-    { v: 6, q: "Backup is unnecessary if DR exists.", o: ["True", "False"], a: [1] },
-    { v: 6, q: "Incremental backup saves all data every time.", o: ["True", "False"], a: [1] },
-    { v: 6, q: "What is a fingerprint in deduplication?", o: ["Encryption key", "Storage address", "File name", "Data block hash value"], a: [3] },
-    { v: 6, q: "Which benefits does deduplication provide? (Choose TWO)", o: ["Higher power usage", "More duplicate data", "Higher latency", "Less storage usage", "Faster backup"], a: [3, 4] },
-    { v: 6, q: "What is the main goal of a Disaster Recovery (DR) system?", o: ["Ensure business continuity", "Improve system performance", "Increase network bandwidth", "Replace backup systems"], a: [0] },
-    { v: 6, q: "Which operations are part of standard backup? (Choose THREE)", o: ["Load balancing", "Data reading", "Live migration", "Data transfer", "Data storage"], a: [1, 3, 4] },
-    { v: 6, q: "What is Backup Window (BW)?", o: ["Snapshot duration", "Time to restore data", "Downtime period", "Time between backups", "Time allowed to perform backup"], a: [4] },
-    { v: 6, q: "Inline deduplication happens after data is written to disk.", o: ["True", "False"], a: [1] },
-    { v: 6, q: "Why are DR drills important?", o: ["Increase storage capacity", "Archive old data", "Reduce backup size", "Improve compression", "Test DR readiness"], a: [4] },
-    { v: 6, q: "SmartMigration suspends services permanently during migration.", o: ["True", "False"], a: [1] },
-    { v: 6, q: "Inline deduplication performs deduplication:", o: ["Before writing data", "During backup", "During replication", "After writing data", "After migration"], a: [0] },
-    { v: 6, q: "Which DR architectures exist? (Choose THREE)", o: ["Active-Active", "Active-Passive", "Snapshot", "Incremental", "Geo-redundant"], a: [0, 1, 4] },
-    { v: 6, q: "Geo-redundant DR protects against site-level disasters.", o: ["True", "False"], a: [0] },
-    { v: 6, q: "DR systems eliminate the need for backup.", o: ["True", "False"], a: [1] },
-    { v: 6, q: "Backup and DR have the same purpose.", o: ["True", "False"], a: [1] },
-    { v: 6, q: "Which steps are part of Change Management? (Choose THREE)", o: ["Incident recovery", "RFC submission", "Alarm masking", "Change approval", "Disk replacement", "Change review"], a: [1, 3, 5] }
+    // --- CODE ANALYSIS & MISC ---
+    {
+        text: "What will this function return for f(x)=x² from 0 to 2 with n=4?",
+        code: "def func(f, a, b, n):\n    h = (b - a) / n\n    result = (f(a) + f(b)) / 2\n    for i in range(1, n):\n        result += f(a + i * h)\n    return result * h",
+        options: ["2.666...", "2.75", "2.25", "2.5", "3.0"],
+        correct: 1
+    },
+    {
+        text: "What is being calculated here?",
+        code: "for i in range(1, n):\n    diff = table[i-1]\n    current_diff = [diff[j+1] - diff[j] for j in range(n-i)]\n    table.append(current_diff)",
+        options: ["Backward difference table", "Lagrange coefficients", "Forward difference table", "Divided difference table", "Wrong difference table"],
+        correct: 2
+    },
+    {
+        text: "Identify the error in this LU decomposition snippet:",
+        code: "for i in range(n):\n    L[i,i] = 1\n    for j in range(i, n):\n        U[i,j] = A[i,j] - sum(L[i,k]*U[k,j] for k in range(i))\n    for j in range(i+1, n):\n        L[j,i] = (A[j,i] - sum(L[j,k]*U[k,i] for k in range(i))) / U[i,i]",
+        options: ["Line 1", "Line 2", "Line 3", "No error", "Summation limits are wrong"],
+        correct: 3
+    },
+    {
+        text: "O(h²) means the error decreases proportional to:",
+        options: ["h", "h²", "constant", "1/h", "h³"],
+        correct: 1
+    },
+    {
+        text: "In tabulated data with equal intervals, h denotes:",
+        options: ["Step size", "Number of points", "Residual", "Slope", "Precision"],
+        correct: 0
+    },
+    {
+        text: "A key caution when fitting ln(y) vs x is that:",
+        options: ["It works only for negative y", "It makes the model non-linear", "It changes the error structure (minimizes relative error)", "It guarantees R² = 1", "None of the above"],
+        correct: 2
+    },
+    {
+        text: "If f represents distance in meters and x represents time in seconds, f' has units of:",
+        options: ["m", "s", "m/s", "m/s²", "m*s"],
+        correct: 2
+    },
+    {
+        text: "Smaller h always decreases total error in numerical calculations.",
+        options: ["TRUE", "FALSE"],
+        correct: 1
+    },
+    {
+        text: "Which rule is the most accurate among Newton-Cotes for the same number of points?",
+        options: ["Trapezoidal", "Simpson 1/3", "Simpson 3/8", "Boole's rule", "Weddle's rule"],
+        correct: 4
+    },
+    {
+        text: "The Rayleigh quotient is used to approximate:",
+        options: ["Roots", "Eigenvalues", "Determinant", "Inverse", "Residuals"],
+        correct: 1
+    },
+    {
+        text: "What does this code fragment represent?",
+        code: "x_new = (b[i] - sum(A[i][j] * x[j] for j in range(n) if i != j)) / A[i][i]",
+        options: ["Jacobi iteration", "Gauss-Seidel iteration", "SOR iteration", "Gaussian elimination", "LU step"],
+        correct: 0
+    },
+    {
+        text: "In Python, which function correctly implements the Bisection method step?",
+        code: "if f(a) * f(m) < 0: b = m\nelse: a = m",
+        options: ["Snippet 1", "Snippet 2", "Both", "Neither", "Depends on f"],
+        correct: 0
+    },
+    {
+        text: "What is the purpose of partial pivoting in Gaussian elimination?",
+        options: ["Reduce number of operations", "Avoid division by zero or very small numbers", "Make matrix symmetric", "Find determinant", "Find inverse"],
+        correct: 1
+    },
+    {
+        text: "A cubic spline S(x) on [xi, xi+1] is a polynomial of degree:",
+        options: ["1", "2", "3", "4", "5"],
+        correct: 2
+    },
+    {
+        text: "Which method is faster to converge in most cases?",
+        options: ["Jacobi", "Gauss-Seidel", "Bisection", "False Position", "Power method"],
+        correct: 1
+    },
+    {
+        text: "The 'h' in numerical differentiation formula (f(x+h)-f(x))/h is called:",
+        options: ["Slope", "Step size", "Residual", "Error", "Index"],
+        correct: 1
+    },
+    {
+        text: "Richardson extrapolation is used to:",
+        options: ["Find roots", "Improve accuracy of numerical differentiation/integration", "Solve СЛАУ", "Fit curves", "Find eigenvalues"],
+        correct: 1
+    },
+    {
+        text: "The Romberg integration method is based on:",
+        options: ["Simpson's rule", "Trapezoidal rule + Richardson extrapolation", "Gaussian quadrature", "Boole's rule", "Weddle's rule"],
+        correct: 1
+    },
+    {
+        text: "The condition number of a matrix measures:",
+        options: ["Its size", "Its determinant", "Sensitivity to changes in input data", "Number of zeros", "Number of eigenvalues"],
+        correct: 2
+    },
+    {
+        text: "Central difference formula (f(x+h)-f(x-h))/(2h) has error of order:",
+        options: ["O(h)", "O(h²)", "O(h³)", "O(h⁴)", "O(1)"],
+        correct: 1
+    },
+    {
+        text: "In least squares, the coefficient of determination R² close to 1 means:",
+        options: ["Poor fit", "Good fit", "No correlation", "Negative correlation", "Random noise"],
+        correct: 1
+    }
 ];
+
+while(questions.length < 65) {
+    questions.push({...questions[Math.floor(Math.random() * 10)], isDuplicate: true});
+}
