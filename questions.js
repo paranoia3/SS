@@ -1,6 +1,6 @@
 // Updated Question Database derived from uploaded Word documents
 // Total Questions: 55
-// Formatted with LaTeX for math and code blocks for algorithms
+// Formatted with LaTeX for math ($...$) and code blocks for algorithms
 
 const questions = [
     // --- PART 1: Errors & Floating Point ---
