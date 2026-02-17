@@ -22,15 +22,24 @@ function startQuiz(m, variant) {
     currentQ = 0;
     userAns = [];
 
-    // Используем все вопросы
-    activeQuestions = questions;
-    // Если нужно разделение на варианты, можно раскомментировать и адаптировать:
-    // const mid = Math.ceil(questions.length / 2);
-    // activeQuestions = (variant === 1) ? questions.slice(0, mid) : questions.slice(mid);
+    // Логика разделения на 2 варианта
+    // Всего 55 вопросов. Делим пополам (28 и 27)
+    const splitIndex = 28;
+
+    if (variant === 1) {
+        // Вопросы с 1 по 28 (индексы 0..27)
+        activeQuestions = questions.slice(0, splitIndex);
+    } else if (variant === 2) {
+        // Вопросы с 29 по 55 (индексы 28..конец)
+        activeQuestions = questions.slice(splitIndex);
+    } else {
+        // На всякий случай, если вариант не указан
+        activeQuestions = questions;
+    }
 
     document.getElementById('setup-screen').classList.add('hidden');
     document.getElementById('quiz-screen').classList.remove('hidden');
-    document.getElementById('mode-indicator').innerText = `РЕЖИМ: ${m === 'training' ? 'ОБУЧЕНИЕ' : 'ЭКЗАМЕН'}`;
+    document.getElementById('mode-indicator').innerText = `РЕЖИМ: ${m === 'training' ? 'ОБУЧЕНИЕ' : 'ЭКЗАМЕН'} (ВАР. ${variant})`;
 
     window.scrollTo(0, 0);
     renderQuestion();
@@ -77,7 +86,6 @@ function renderQuestion() {
     });
 
     // --- KaTeX Rendering Trigger ---
-    // Этот код найдет все элементы с LaTeX ($...$) внутри quiz-card и отрендерит их
     if (window.renderMathInElement) {
         renderMathInElement(document.getElementById('quiz-screen'), {
             delimiters: [
@@ -171,7 +179,6 @@ function showResults() {
         review.appendChild(div);
     });
 
-    // Рендер формул в результатах
     if (window.renderMathInElement) {
         renderMathInElement(review, {
             delimiters: [
