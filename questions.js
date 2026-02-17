@@ -1,395 +1,186 @@
-// Complete Question Database
-// Total Questions: 76
-// Formatted with LaTeX for math ($...$)
-
+// --- QUESTIONS DATABASE ---
 const questions = [
+    // ============================================
+    // ORIGINAL QUESTIONS (0 - 75)
+    // ============================================
     // --- PART 1: Errors & Floating Point ---
-    {
-        text: "Determine the number of significant digits in the number $0.0050410$.",
-        options: ["3", "4", "5", "7"],
-        correct: 2 // 5, 0, 4, 1, 0
-    },
-    {
-        text: "In floating point arithmetic, machine epsilon measures:",
-        options: ["The smallest relative spacing between representable numbers", "The underflow limit", "The overflow limit", "The largest representable number"],
-        correct: 0
-    },
-    {
-        text: "Which error measure is most suitable for comparing approximations of very different magnitudes (e.g., $a=0.01$ vs $b=1000$)?",
-        options: ["Absolute error", "Relative error", "Truncation error", "Round-off error"],
-        correct: 1
-    },
+    { text: "Determine the number of significant digits in the number $0.0050410$.", options: ["3", "4", "5", "7"], correct: 2 },
+    { text: "In floating point arithmetic, machine epsilon measures:", options: ["The smallest relative spacing between representable numbers", "The underflow limit", "The overflow limit", "The largest representable number"], correct: 0 },
+    { text: "Which error measure is most suitable for comparing approximations of very different magnitudes (e.g., $a=0.01$ vs $b=1000$)?", options: ["Absolute error", "Relative error", "Truncation error", "Round-off error"], correct: 1 },
 
-    // --- PART 2: Linear Algebra (Methods & Theory) ---
-    {
-        text: "In the iterative method for matrix inversion, the error matrix $E$ is typically defined as:",
-        options: ["$E = AB - I$", "$E = I - AB$", "$E = A - B$", "$E = B - A^{-1}$"],
-        correct: 0
-    },
-    {
-        text: "Which condition guarantees convergence for both Jacobi and Gauss-Seidel methods for solving $Ax=b$?",
-        options: ["The spectral radius $\\rho(T) < 1$", "$A$ is tridiagonal", "$A$ is strictly diagonally dominant", "$A$ has no zero diagonal elements"],
-        correct: 0 // Spectral radius < 1 is the necessary and sufficient condition
-    },
-    {
-        text: "Gauss-Seidel iteration is guaranteed to converge if the coefficient matrix $A$ is:",
-        options: ["Strictly diagonally dominant", "Upper triangular", "Lower triangular", "Symmetric"],
-        correct: 0
-    },
-    {
-        text: "What is the final form of the augmented matrix after successful Gauss-Jordan elimination?",
-        options: ["$[ I \\mid x ]$ (Identity)", "$[ U \\mid y ]$ (Upper triangular)", "$[ L \\mid z ]$ (Lower triangular)", "$[ D \\mid w ]$ (Diagonal)"],
-        correct: 0
-    },
-    {
-        text: "What distinguishes the final matrix form in Gauss-Jordan elimination from standard Gaussian elimination?",
-        options: ["Gauss-Jordan gives Reduced Row Echelon Form (Identity-like)", "Gauss-Jordan gives Upper Triangular", "Gauss-Jordan requires partial pivoting", "Gauss-Jordan is less stable"],
-        correct: 0
-    },
-    {
-        text: "What does this function compute in Gaussian elimination?",
-        code: "for i in range(n):\n    for j in range(i+1, n):\n        factor = A[j][i] / A[i][i]\n        for k in range(i, n): A[j][k] -= factor * A[i][k]",
-        options: ["Upper triangular matrix", "Lower triangular matrix", "Identity matrix", "Diagonal matrix"],
-        correct: 0
-    },
-    {
-        text: "Why is Gauss-Seidel typically faster than Jacobi for large systems?",
-        options: ["It uses updated values immediately", "It requires fewer operations per iteration", "It avoids storing two vectors", "It exploits sparsity better"],
-        correct: 0
-    },
-    {
-        text: "The relaxation method with $\\omega=1$ is equivalent to:",
-        options: ["Gauss-Seidel method", "Jacobi method", "Gauss elimination", "No method"],
-        correct: 0
-    },
-    {
-        text: "For the system $4x + y = 7$, $x + 3y = 5$, what is $x$ after one Gauss-Seidel iteration starting from $(0,0)$?",
-        options: ["1.750", "1.000", "1.500", "1.167"],
-        correct: 0 // x = 7/4 = 1.75
-    },
-    {
-        text: "Which code correctly implements the Gauss-Seidel method?",
-        code: "x_new[i] = (b[i] - sum(A[i][j]*x_new[j] for j < i) - sum(A[i][j]*x_old[j] for j > i)) / A[i][i]",
-        options: ["Using updated values for j<i", "Using old values for all j", "Using updated values for j>i", "Using b[i] only"],
-        correct: 0
-    },
-    {
-        text: "The inverse of a matrix $A$ is written as $A^{-1}$ so that $AA^{-1} = A^{-1}A$ equals:",
-        options: ["Identity matrix $I$", "Null matrix $0$", "Singular matrix", "Transpose $A^T$"],
-        correct: 0
-    },
+    // --- PART 2: Linear Algebra ---
+    { text: "In the iterative method for matrix inversion, the error matrix $E$ is typically defined as:", options: ["$E = AB - I$", "$E = I - AB$", "$E = A - B$", "$E = B - A^{-1}$"], correct: 0 },
+    { text: "Which condition guarantees convergence for both Jacobi and Gauss-Seidel methods for solving $Ax=b$?", options: ["The spectral radius $\\rho(T) < 1$", "$A$ is tridiagonal", "$A$ is strictly diagonally dominant", "$A$ has no zero diagonal elements"], correct: 0 },
+    { text: "Gauss-Seidel iteration is guaranteed to converge if the coefficient matrix $A$ is:", options: ["Strictly diagonally dominant", "Upper triangular", "Lower triangular", "Symmetric"], correct: 0 },
+    { text: "What is the final form of the augmented matrix after successful Gauss-Jordan elimination?", options: ["$[ I \\mid x ]$ (Identity)", "$[ U \\mid y ]$ (Upper triangular)", "$[ L \\mid z ]$ (Lower triangular)", "$[ D \\mid w ]$ (Diagonal)"], correct: 0 },
+    { text: "What distinguishes the final matrix form in Gauss-Jordan elimination from standard Gaussian elimination?", options: ["Gauss-Jordan gives Reduced Row Echelon Form (Identity-like)", "Gauss-Jordan gives Upper Triangular", "Gauss-Jordan requires partial pivoting", "Gauss-Jordan is less stable"], correct: 0 },
+    { text: "What does this function compute in Gaussian elimination?", code: "for i in range(n):\n    for j in range(i+1, n):\n        factor = A[j][i] / A[i][i]\n        for k in range(i, n): A[j][k] -= factor * A[i][k]", options: ["Upper triangular matrix", "Lower triangular matrix", "Identity matrix", "Diagonal matrix"], correct: 0 },
+    { text: "Why is Gauss-Seidel typically faster than Jacobi for large systems?", options: ["It uses updated values immediately", "It requires fewer operations per iteration", "It avoids storing two vectors", "It exploits sparsity better"], correct: 0 },
+    { text: "The relaxation method with $\\omega=1$ is equivalent to:", options: ["Gauss-Seidel method", "Jacobi method", "Gauss elimination", "No method"], correct: 0 },
+    { text: "For the system $4x + y = 7$, $x + 3y = 5$, what is $x$ after one Gauss-Seidel iteration starting from $(0,0)$?", options: ["1.750", "1.000", "1.500", "1.167"], correct: 0 },
+    { text: "Which code correctly implements the Gauss-Seidel method?", code: "x_new[i] = (b[i] - sum(A[i][j]*x_new[j] for j < i) - sum(A[i][j]*x_old[j] for j > i)) / A[i][i]", options: ["Using updated values for j<i", "Using old values for all j", "Using updated values for j>i", "Using b[i] only"], correct: 0 },
+    { text: "The inverse of a matrix $A$ is written as $A^{-1}$ so that $AA^{-1} = A^{-1}A$ equals:", options: ["Identity matrix $I$", "Null matrix $0$", "Singular matrix", "Transpose $A^T$"], correct: 0 },
 
     // --- PART 3: Eigenvalues ---
-    {
-        text: "What is the primary goal of the Power Method?",
-        options: ["Find the dominant eigenvalue (largest magnitude)", "Find the smallest eigenvalue", "Find all eigenvectors", "Invert the matrix"],
-        correct: 0
-    },
-    {
-        text: "How is the dominant eigenvalue estimated in the Power method?",
-        options: ["Using the Rayleigh quotient $\\lambda_k = (v_k^T A v_k) / (v_k^T v_k)$", "By computing trace(A)", "By solving $\\det(A-\\lambda I)=0$", "By averaging diagonal elements"],
-        correct: 0
-    },
-    {
-        text: "The Jacobi method for a symmetric matrix $A$ can be viewed as:",
-        options: ["Minimizing the sum of squares of off-diagonal elements", "Maximizing the determinant", "Minimizing the condition number", "Maximizing the diagonal elements"],
-        correct: 0
-    },
-    {
-        text: "Which method is most efficient/suitable for finding all eigenvalues of a symmetric matrix?",
-        options: ["Jacobi method", "Power method", "Cramer's rule", "Gaussian elimination"],
-        correct: 0
-    },
-    {
-        text: "In the Jacobi eigenvalue method, the rotation angle $\\theta$ is chosen to satisfy:",
-        options: ["$\\tan(2\\theta) = 2a_{pq} / (a_{pp} - a_{qq})$", "$\\cos(2\\theta) = a_{pq}$", "$\\sin(2\\theta) = 1$", "$\\theta = 45^\\circ$"],
-        correct: 0
-    },
-    {
-        text: "What are the eigenvalues of the matrix A?",
-        code: "A = [[6, 3],\n     [4, 5]]",
-        options: ["2 and 9", "2 and 10", "1 and 9", "2 and 7"],
-        correct: 0
-    },
-    {
-        text: "In the Jacobi method, the rotation matrix $G$ is used to:",
-        options: ["Zero out the largest off-diagonal element", "Scale the matrix", "Compute the determinant", "Find the inverse"],
-        correct: 0
-    },
+    { text: "What is the primary goal of the Power Method?", options: ["Find the dominant eigenvalue (largest magnitude)", "Find the smallest eigenvalue", "Find all eigenvectors", "Invert the matrix"], correct: 0 },
+    { text: "How is the dominant eigenvalue estimated in the Power method?", options: ["Using the Rayleigh quotient $\\lambda_k = (v_k^T A v_k) / (v_k^T v_k)$", "By computing trace(A)", "By solving $\\det(A-\\lambda I)=0$", "By averaging diagonal elements"], correct: 0 },
+    { text: "The Jacobi method for a symmetric matrix $A$ can be viewed as:", options: ["Minimizing the sum of squares of off-diagonal elements", "Maximizing the determinant", "Minimizing the condition number", "Maximizing the diagonal elements"], correct: 0 },
+    { text: "Which method is most efficient/suitable for finding all eigenvalues of a symmetric matrix?", options: ["Jacobi method", "Power method", "Cramer's rule", "Gaussian elimination"], correct: 0 },
+    { text: "In the Jacobi eigenvalue method, the rotation angle $\\theta$ is chosen to satisfy:", options: ["$\\tan(2\\theta) = 2a_{pq} / (a_{pp} - a_{qq})$", "$\\cos(2\\theta) = a_{pq}$", "$\\sin(2\\theta) = 1$", "$\\theta = 45^\\circ$"], correct: 0 },
+    { text: "What are the eigenvalues of the matrix A?", code: "A = [[6, 3],\n     [4, 5]]", options: ["2 and 9", "2 and 10", "1 and 9", "2 and 7"], correct: 0 },
+    { text: "In the Jacobi method, the rotation matrix $G$ is used to:", options: ["Zero out the largest off-diagonal element", "Scale the matrix", "Compute the determinant", "Find the inverse"], correct: 0 },
 
     // --- PART 4: Nonlinear Equations (Roots) ---
-    {
-        text: "In the Newton-Raphson method, the formula for $x_{n+1}$ is:",
-        options: ["$x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}$", "$x_{n+1} = x_n - f(x_n)$", "$x_{n+1} = x_n - \\frac{f'(x_n)}{f(x_n)}$", "$x_{n+1} = \\frac{a+b}{2}$"],
-        correct: 0
-    },
-    {
-        text: "In the Secant method, the formula for $x_{n+1}$ is:",
-        options: ["$x_{n+1} = x_n - f(x_n) \\frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})}$", "$x_{n+1} = \\frac{x_n + x_{n-1}}{2}$", "$x_{n+1} = g(x_n)$", "$x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}$"],
-        correct: 0
-    },
-    {
-        text: "In the Fixed-Point iteration, the formula is:",
-        options: ["$x_{n+1} = g(x_n)$", "$x_{n+1} = x_n - f(x_n)$", "$x_{n+1} = \\frac{a+b}{2}$", "$x_{n+1} = f(x_n)$"],
-        correct: 0
-    },
-    {
-        text: "What is the primary requirement for the Bisection Method to guarantee convergence?",
-        options: ["Function must change sign ($f(a)f(b) < 0$)", "f'(x) must be non-zero", "Initial guess must be close", "Function must be polynomial"],
-        correct: 0
-    },
-    {
-        text: "Which method can find complex roots without using complex initial guesses?",
-        options: ["Müller's Method", "Bisection", "Secant", "Newton-Raphson"],
-        correct: 0
-    },
-    {
-        text: "Given $f(x) = x^3 - 2x - 5$ and $f'(x) = 3x^2 - 2$, find $x_1$ using Newton-Raphson with $x_0 = 2$.",
-        options: ["2.1", "2.0", "1.9", "2.2"],
-        correct: 0
-    },
-    {
-        text: "Which code correctly implements the bisection interval update?",
-        options: ["if f(a)*f(mid) < 0: b=mid else: a=mid", "if f(a)*f(mid) > 0: b=mid", "a, b = mid, mid", "b = a + mid"],
-        correct: 0
-    },
+    { text: "In the Newton-Raphson method, the formula for $x_{n+1}$ is:", options: ["$x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}$", "$x_{n+1} = x_n - f(x_n)$", "$x_{n+1} = x_n - \\frac{f'(x_n)}{f(x_n)}$", "$x_{n+1} = \\frac{a+b}{2}$"], correct: 0 },
+    { text: "In the Secant method, the formula for $x_{n+1}$ is:", options: ["$x_{n+1} = x_n - f(x_n) \\frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})}$", "$x_{n+1} = \\frac{x_n + x_{n-1}}{2}$", "$x_{n+1} = g(x_n)$", "$x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}$"], correct: 0 },
+    { text: "In the Fixed-Point iteration, the formula is:", options: ["$x_{n+1} = g(x_n)$", "$x_{n+1} = x_n - f(x_n)$", "$x_{n+1} = \\frac{a+b}{2}$", "$x_{n+1} = f(x_n)$"], correct: 0 },
+    { text: "What is the primary requirement for the Bisection Method to guarantee convergence?", options: ["Function must change sign ($f(a)f(b) < 0$)", "f'(x) must be non-zero", "Initial guess must be close", "Function must be polynomial"], correct: 0 },
+    { text: "Which method can find complex roots without using complex initial guesses?", options: ["Müller's Method", "Bisection", "Secant", "Newton-Raphson"], correct: 0 },
+    { text: "Given $f(x) = x^3 - 2x - 5$ and $f'(x) = 3x^2 - 2$, find $x_1$ using Newton-Raphson with $x_0 = 2$.", options: ["2.1", "2.0", "1.9", "2.2"], correct: 0 },
+    { text: "Which code correctly implements the bisection interval update?", options: ["if f(a)*f(mid) < 0: b=mid else: a=mid", "if f(a)*f(mid) > 0: b=mid", "a, b = mid, mid", "b = a + mid"], correct: 0 },
 
     // --- PART 5: Interpolation ---
-    {
-        text: "The Lagrange basis polynomial $L_i(x)$ for point $(x_i, y_i)$ has what property?",
-        options: ["$L_i(x_i) = 1$ and $L_i(x_j) = 0$ for $j \\neq i$", "$L_i(x_i) = y_i$", "$L_i(x)$ integrates to 1", "$L_i(x_i) = 0$"],
-        correct: 0
-    },
-    {
-        text: "Newton's Forward Interpolation formula uses $u$ defined as:",
-        options: ["$u = (x - x_0) / h$", "$u = x - x_0$", "$u = (x - x_n) / h$", "$u = h(x - x_0)$"],
-        correct: 0
-    },
-    {
-        text: "The first divided difference $f[x_i, x_j]$ is defined as:",
-        options: ["$\\frac{f(x_j) - f(x_i)}{x_j - x_i}$", "$f(x_j) - f(x_i)$", "$\\frac{f(x_j) + f(x_i)}{x_j - x_i}$", "$\\frac{f(x_j) - f(x_i)}{h}$"],
-        correct: 0
-    },
-    {
-        text: "Which interpolation method has local control (changing one point affects only nearby intervals)?",
-        options: ["Piecewise/Cubic Splines", "Lagrange Interpolation", "Newton Forward", "Global Polynomials"],
-        correct: 0
-    },
-    {
-        text: "For cubic splines, we typically enforce continuity of:",
-        options: ["Function, 1st, and 2nd derivatives", "Function values only", "All derivatives", "1st derivative only"],
-        correct: 0
-    },
-    {
-        text: "Using Lagrange interpolation for points $(1,2), (2,4), (3,8), (4,16)$, estimate value at $x=2.5$.",
-        options: ["5.625", "6.5", "5.0", "6.0"],
-        correct: 0
-    },
-    {
-        text: "Given data $x=[0,1,2,3]$, $y=[2,4,8,16]$, calculate $\\Delta^2 y_0$.",
-        options: ["2", "4", "1", "6"],
-        correct: 0 // (8-4)-(4-2) = 2
-    },
-    {
-        text: "What does this Python code calculate?",
-        code: "for i in range(1, n):\n    diff = table[i-1]\n    cur = [diff[j+1] - diff[j] for j in range(n-i)]",
-        options: ["Forward difference table", "Backward difference table", "Divided difference table", "Lagrange table"],
-        correct: 0
-    },
+    { text: "The Lagrange basis polynomial $L_i(x)$ for point $(x_i, y_i)$ has what property?", options: ["$L_i(x_i) = 1$ and $L_i(x_j) = 0$ for $j \\neq i$", "$L_i(x_i) = y_i$", "$L_i(x)$ integrates to 1", "$L_i(x_i) = 0$"], correct: 0 },
+    { text: "Newton's Forward Interpolation formula uses $u$ defined as:", options: ["$u = (x - x_0) / h$", "$u = x - x_0$", "$u = (x - x_n) / h$", "$u = h(x - x_0)$"], correct: 0 },
+    { text: "The first divided difference $f[x_i, x_j]$ is defined as:", options: ["$\\frac{f(x_j) - f(x_i)}{x_j - x_i}$", "$f(x_j) - f(x_i)$", "$\\frac{f(x_j) + f(x_i)}{x_j - x_i}$", "$\\frac{f(x_j) - f(x_i)}{h}$"], correct: 0 },
+    { text: "Which interpolation method has local control (changing one point affects only nearby intervals)?", options: ["Piecewise/Cubic Splines", "Lagrange Interpolation", "Newton Forward", "Global Polynomials"], correct: 0 },
+    { text: "For cubic splines, we typically enforce continuity of:", options: ["Function, 1st, and 2nd derivatives", "Function values only", "All derivatives", "1st derivative only"], correct: 0 },
+    { text: "Using Lagrange interpolation for points $(1,2), (2,4), (3,8), (4,16)$, estimate value at $x=2.5$.", options: ["5.625", "6.5", "5.0", "6.0"], correct: 0 },
+    { text: "Given data $x=[0,1,2,3]$, $y=[2,4,8,16]$, calculate $\\Delta^2 y_0$.", options: ["2", "4", "1", "6"], correct: 0 },
+    { text: "What does this Python code calculate?", code: "for i in range(1, n):\n    diff = table[i-1]\n    cur = [diff[j+1] - diff[j] for j in range(n-i)]", options: ["Forward difference table", "Backward difference table", "Divided difference table", "Lagrange table"], correct: 0 },
 
     // --- PART 6: Numerical Integration ---
-    {
-        text: "Simpson's 3/8 rule uses the formula:",
-        options: ["$\\frac{3h}{8} [f_0 + 3f_1 + 3f_2 + f_3]$", "$\\frac{3h}{8} [f_0 + 2f_1 + 2f_2 + f_3]$", "$\\frac{h}{3} [f_0 + 4f_1 + f_2]$", "$\\frac{2h}{45} [7f_0...]$"],
-        correct: 0
-    },
-    {
-        text: "For 13 equally spaced points (12 intervals), which combination is optimal?",
-        options: ["Weddle's rule twice (6+6 intervals)", "Boole's rule 3 times", "Simpson's 1/3 rule", "Trapezoidal rule"],
-        correct: 0
-    },
-    {
-        text: "For composite integration with 9 equally spaced points (8 intervals), Boole's rule is applied:",
-        options: ["Twice: first 5 points and last 5 points", "Once", "Three times", "Cannot be applied"],
-        correct: 0
-    },
-    {
-        text: "Weddle's rule is generally more accurate because:",
-        options: ["It uses 7 points (deg 6 poly)", "It uses more points", "It uses unequal intervals", "It is for derivatives"],
-        correct: 0
-    },
-    {
-        text: "What is the value of $\\int_0^2 x^3 dx$ using Simpson's 1/3 rule with $h=1$?",
-        options: ["4.0", "3.5", "5.0", "3.0"],
-        correct: 0 // Exact 4. Simpson is exact for cubic.
-    },
-    {
-        text: "What will this function return for $f(x)=x^2$ from 0 to 2 with $n=4$?",
-        code: "h = (b-a)/n; res = (f(a)+f(b))/2; for i in range(1,n): res += f(a+i*h); return res*h",
-        options: ["2.75", "2.25", "2.66", "3.0"],
-        correct: 0 // Trapezoidal rule
-    },
-    {
-        text: "The weights for Boole's rule (5 points) are proportional to:",
-        options: ["7, 32, 12, 32, 7", "1, 4, 2, 4, 1", "1, 3, 3, 1", "1, 1, 1, 1"],
-        correct: 0
-    },
+    { text: "Simpson's 3/8 rule uses the formula:", options: ["$\\frac{3h}{8} [f_0 + 3f_1 + 3f_2 + f_3]$", "$\\frac{3h}{8} [f_0 + 2f_1 + 2f_2 + f_3]$", "$\\frac{h}{3} [f_0 + 4f_1 + f_2]$", "$\\frac{2h}{45} [7f_0...]$"], correct: 0 },
+    { text: "For 13 equally spaced points (12 intervals), which combination is optimal?", options: ["Weddle's rule twice (6+6 intervals)", "Boole's rule 3 times", "Simpson's 1/3 rule", "Trapezoidal rule"], correct: 0 },
+    { text: "For composite integration with 9 equally spaced points (8 intervals), Boole's rule is applied:", options: ["Twice: first 5 points and last 5 points", "Once", "Three times", "Cannot be applied"], correct: 0 },
+    { text: "Weddle's rule is generally more accurate because:", options: ["It uses 7 points (deg 6 poly)", "It uses more points", "It uses unequal intervals", "It is for derivatives"], correct: 0 },
+    { text: "What is the value of $\\int_0^2 x^3 dx$ using Simpson's 1/3 rule with $h=1$?", options: ["4.0", "3.5", "5.0", "3.0"], correct: 0 },
+    { text: "What will this function return for $f(x)=x^2$ from 0 to 2 with $n=4$?", code: "h = (b-a)/n; res = (f(a)+f(b))/2; for i in range(1,n): res += f(a+i*h); return res*h", options: ["2.75", "2.25", "2.66", "3.0"], correct: 0 },
+    { text: "The weights for Boole's rule (5 points) are proportional to:", options: ["7, 32, 12, 32, 7", "1, 4, 2, 4, 1", "1, 3, 3, 1", "1, 1, 1, 1"], correct: 0 },
 
-    // --- PART 7: ODEs (Euler, RK, etc.) ---
-    {
-        text: "What is the global error order of Euler's method?",
-        options: ["$O(h)$", "$O(h^2)$", "$O(h^3)$", "$O(h^4)$"],
-        correct: 0
-    },
-    {
-        text: "Modified Euler method formula is:",
-        options: ["$y_{n+1} = y_n + \\frac{h}{2} [f(x_n, y_n) + f(x_{n+1}, y_{pred})]$", "$y_{n+1} = y_n + h f(x_n, y_n)$", "$y_{n+1} = y_n + h f(x_{n+1}, y_{n+1})$", "RK4 formula"],
-        correct: 0
-    },
-    {
-        text: "Identify the correct formula for $k_3$ in RK4:",
-        options: ["$k_3 = hf(x_n + h/2, y_n + k_2/2)$", "$k_3 = hf(x_n + h/2, y_n + k_1/2)$", "$k_3 = hf(x_n + h, y_n + k_2)$", "$k_3 = hf(x_n + h, y_n + 2k_2)$"],
-        correct: 0
-    },
-    {
-        text: "The 3rd Order RK formula uses which pattern for $k_3$?",
-        options: ["$k_3 = hf(x_n + h, y_n - k_1 + 2k_2)$", "$k_3 = hf(x_n + h, y_n + k_2)$", "$k_3 = hf(x_n + h/2, y_n + k_2/2)$", "None"],
-        correct: 0
-    },
-    {
-        text: "Picard's method is based on:",
-        options: ["Iterative solution of integral equation", "Numerical differentiation", "Taylor series", "Matrix operations"],
-        correct: 0
-    },
-    {
-        text: "For $y' = x^2 + y, y(0)=1$, find $y''(0)$ using Taylor series.",
-        options: ["$1$", "$2$", "$0$", "$3$"],
-        correct: 0 // y'' = 2x + y'. y'(0)=1. y''(0)=0+1=1.
-    },
-    {
-        text: "Comparing Euler and Modified Euler for $y'=2x, y(0)=0, h=1$. Euler gives 0. Modified Euler gives:",
-        options: ["1.0", "0.5", "2.0", "0.25"],
-        correct: 0
-    },
-    {
-        text: "Solve $y' = -2y, y(0)=1, h=0.1$ for $y(0.2)$ using Euler's method.",
-        options: ["0.64", "0.72", "0.81", "0.90"],
-        correct: 0
-    },
+    // --- PART 7: ODEs ---
+    { text: "What is the global error order of Euler's method?", options: ["$O(h)$", "$O(h^2)$", "$O(h^3)$", "$O(h^4)$"], correct: 0 },
+    { text: "Modified Euler method formula is:", options: ["$y_{n+1} = y_n + \\frac{h}{2} [f(x_n, y_n) + f(x_{n+1}, y_{pred})]$", "$y_{n+1} = y_n + h f(x_n, y_n)$", "$y_{n+1} = y_n + h f(x_{n+1}, y_{n+1})$", "RK4 formula"], correct: 0 },
+    { text: "Identify the correct formula for $k_3$ in RK4:", options: ["$k_3 = hf(x_n + h/2, y_n + k_2/2)$", "$k_3 = hf(x_n + h/2, y_n + k_1/2)$", "$k_3 = hf(x_n + h, y_n + k_2)$", "$k_3 = hf(x_n + h, y_n + 2k_2)$"], correct: 0 },
+    { text: "The 3rd Order RK formula uses which pattern for $k_3$?", options: ["$k_3 = hf(x_n + h, y_n - k_1 + 2k_2)$", "$k_3 = hf(x_n + h, y_n + k_2)$", "$k_3 = hf(x_n + h/2, y_n + k_2/2)$", "None"], correct: 0 },
+    { text: "Picard's method is based on:", options: ["Iterative solution of integral equation", "Numerical differentiation", "Taylor series", "Matrix operations"], correct: 0 },
+    { text: "For $y' = x^2 + y, y(0)=1$, find $y''(0)$ using Taylor series.", options: ["$1$", "$2$", "$0$", "$3$"], correct: 0 },
+    { text: "Comparing Euler and Modified Euler for $y'=2x, y(0)=0, h=1$. Euler gives 0. Modified Euler gives:", options: ["1.0", "0.5", "2.0", "0.25"], correct: 0 },
+    { text: "Solve $y' = -2y, y(0)=1, h=0.1$ for $y(0.2)$ using Euler's method.", options: ["0.64", "0.72", "0.81", "0.90"], correct: 0 },
 
-    // --- PART 8: Code Analysis & Checks ---
-    {
-        text: "What does this code check? `if abs(A[i][i]) <= sum(abs(A[i][j]) for j!=i)`",
-        options: ["Diagonally Dominant condition", "Symmetry", "Positive Definite", "Singularity"],
-        correct: 0
-    },
-    {
-        text: "What will this function return for A=[[3,1,1],[0,4,1],[1,1,5]]?",
-        code: "func check(A): checks strict diagonal dominance",
-        options: ["True", "False", "Error", "None"],
-        correct: 0
-    },
-    {
-        text: "What is the issue with this Jacobi code snippet for finding largest off-diagonal?",
-        options: ["Should check only upper triangle (symmetry optimization)", "No error", "Should check diagonal", "Should use square"],
-        correct: 0
-    },
-    {
-        text: "In LU decomposition code, `U[i][j] = A[i][j] - sum(...)`. This corresponds to:",
-        options: ["Crout/Doolittle algorithm", "Cholesky", "QR", "SVD"],
-        correct: 0
-    },
-    {
-        text: "Which Python function signature best fits a general ODE solver?",
-        code: "def solve(f, x0, y0, h, n)",
-        options: ["Correct", "Missing f", "Missing initial condition", "Wrong parameters"],
-        correct: 0
-    },
+    // --- PART 8: Code Analysis & Theory ---
+    { text: "What does this code check? `if abs(A[i][i]) <= sum(abs(A[i][j]) for j!=i)`", options: ["Diagonally Dominant condition", "Symmetry", "Positive Definite", "Singularity"], correct: 0 },
+    { text: "What will this function return for A=[[3,1,1],[0,4,1],[1,1,5]]?", code: "func check(A): checks strict diagonal dominance", options: ["True", "False", "Error", "None"], correct: 0 },
+    { text: "What is the issue with this Jacobi code snippet for finding largest off-diagonal?", options: ["Should check only upper triangle (symmetry optimization)", "No error", "Should check diagonal", "Should use square"], correct: 0 },
+    { text: "In LU decomposition code, `U[i][j] = A[i][j] - sum(...)`. This corresponds to:", options: ["Crout/Doolittle algorithm", "Cholesky", "QR", "SVD"], correct: 0 },
+    { text: "Which Python function signature best fits a general ODE solver?", code: "def solve(f, x0, y0, h, n)", options: ["Correct", "Missing f", "Missing initial condition", "Wrong parameters"], correct: 0 },
+    { text: "A rectangular system $m \\times n$ ($m \\neq n$) can be solved using:", options: ["Pseudo-Inverse / Least Squares", "Cramer's Rule", "Determinant", "Inverse Matrix"], correct: 0 },
+    { text: "Condition number $\\kappa(A)$ measures:", options: ["Sensitivity of output to input changes", "Matrix size", "Determinant value", "Number of zeros"], correct: 0 },
+    { text: "Orthogonal matrices have a condition number of:", options: ["1", "0", "Infinity", "Undefined"], correct: 0 },
+    { text: "Newton-Cotes formulas are based on:", options: ["Replacing integrand with interpolating polynomial", "Monte Carlo", "Taylor Series", "Derivatives"], correct: 0 },
+    { text: "Which method requires $f(a)f(b) < 0$?", options: ["Bisection", "Newton-Raphson", "Secant", "Fixed-point"], correct: 0 },
+    { text: "In floating point, machine epsilon is:", options: ["Smallest number such that $1.0 + \\epsilon \\neq 1.0$", "Smallest positive number", "Largest number", "Zero"], correct: 0 },
+    { text: "How many significant digits in $0.0050410$?", options: ["5", "4", "3", "7"], correct: 0 },
+    { text: "Using Neumann series, $A^{-1}$ can be approximated if $A=I-E$ by:", options: ["$I + E + E^2 + \\dots$", "$I - E$", "$E - I$", "$I + E$"], correct: 0 },
+    { text: "Correct formula for Muller's method denominator to ensure stability:", options: ["$b + \\text{sgn}(b)\\sqrt{b^2-4ac}$", "$b - \\sqrt{b^2-4ac}$", "$b$", "$2a$"], correct: 0 },
+    { text: "Calculate the second backward difference $\\nabla^2 y_3$ for $y=[1,2,4,8]$.", options: ["2", "1", "4", "8"], correct: 0 },
+    { text: "Cramer's rule is computationally efficient for:", options: ["Very small systems only", "Large systems", "Sparse matrices", "All systems"], correct: 0 },
+    { text: "What is the global error of Euler's method?", options: ["$O(h)$", "$O(h^2)$", "$O(h^3)$", "None"], correct: 0 },
+    { text: "Solve $y' = 2, y(0)=0$ with step $h=0.5$ for $y(1)$ using Euler.", options: ["2.0", "1.5", "1.0", "2.5"], correct: 0 },
+    { text: "Which method is similar to Secant but uses one initial guess?", options: ["Newton-Raphson", "Bisection", "False Position", "Fixed Point"], correct: 0 },
+    { text: "For cubic splines with $n+1$ points, how many polynomials?", options: ["$n$", "$n+1$", "$n-1$", "$2n$"], correct: 0 },
+    { text: "Simpson's error depends on:", options: ["$f^{(4)}$", "$f^{(2)}$", "$f^{(3)}$", "$f^{(1)}$"], correct: 0 },
+    { text: "What is the issue with `while (b-a)/2 > tol` in Bisection?", options: ["No iteration limit (possible infinite loop)", "Wrong logic", "Syntax error", "None"], correct: 0 },
 
-    // --- PART 9: Theory & Definitions ---
-    {
-        text: "A rectangular system $m \\times n$ ($m \\neq n$) can be solved using:",
-        options: ["Pseudo-Inverse / Least Squares", "Cramer's Rule", "Determinant", "Inverse Matrix"],
-        correct: 0
-    },
-    {
-        text: "Condition number $\\kappa(A)$ measures:",
-        options: ["Sensitivity of output to input changes", "Matrix size", "Determinant value", "Number of zeros"],
-        correct: 0
-    },
-    {
-        text: "Orthogonal matrices have a condition number of:",
-        options: ["1", "0", "Infinity", "Undefined"],
-        correct: 0
-    },
-    {
-        text: "Newton-Cotes formulas are based on:",
-        options: ["Replacing integrand with interpolating polynomial", "Monte Carlo", "Taylor Series", "Derivatives"],
-        correct: 0
-    },
-    {
-        text: "Which method requires $f(a)f(b) < 0$?",
-        options: ["Bisection", "Newton-Raphson", "Secant", "Fixed-point"],
-        correct: 0
-    },
-    {
-        text: "In floating point, machine epsilon is:",
-        options: ["Smallest number such that $1.0 + \\epsilon \\neq 1.0$", "Smallest positive number", "Largest number", "Zero"],
-        correct: 0
-    },
-    {
-        text: "How many significant digits in $0.0050410$?",
-        options: ["5", "4", "3", "7"],
-        correct: 0
-    },
-    {
-        text: "Using Neumann series, $A^{-1}$ can be approximated if $A=I-E$ by:",
-        options: ["$I + E + E^2 + \\dots$", "$I - E$", "$E - I$", "$I + E$"],
-        correct: 0
-    },
-    {
-        text: "Correct formula for Muller's method denominator to ensure stability:",
-        options: ["$b + \\text{sgn}(b)\\sqrt{b^2-4ac}$", "$b - \\sqrt{b^2-4ac}$", "$b$", "$2a$"],
-        correct: 0
-    },
-    {
-        text: "Calculate the second backward difference $\\nabla^2 y_3$ for $y=[1,2,4,8]$.",
-        options: ["2", "1", "4", "8"],
-        correct: 0 // y3-2y2+y1 = 8-8+2 = 2. But wait, y3=8, y2=4, y1=2. 8 - 2(4) + 2 = 2.
-    },
-    {
-        text: "Cramer's rule is computationally efficient for:",
-        options: ["Very small systems only", "Large systems", "Sparse matrices", "All systems"],
-        correct: 0
-    },
-    {
-        text: "What is the global error of Euler's method?",
-        options: ["$O(h)$", "$O(h^2)$", "$O(h^3)$", "None"],
-        correct: 0
-    },
-    {
-        text: "Solve $y' = 2, y(0)=0$ with step $h=0.5$ for $y(1)$ using Euler.",
-        options: ["2.0", "1.5", "1.0", "2.5"],
-        correct: 0
-    },
-    {
-        text: "Which method is similar to Secant but uses one initial guess?",
-        options: ["Newton-Raphson", "Bisection", "False Position", "Fixed Point"],
-        correct: 0
-    },
-    {
-        text: "For cubic splines with $n+1$ points, how many polynomials?",
-        options: ["$n$", "$n+1$", "$n-1$", "$2n$"],
-        correct: 0
-    },
-    {
-        text: "Simpson's error depends on:",
-        options: ["$f^{(4)}$", "$f^{(2)}$", "$f^{(3)}$", "$f^{(1)}$"],
-        correct: 0
-    },
-    {
-        text: "What is the issue with `while (b-a)/2 > tol` in Bisection?",
-        options: ["No iteration limit (possible infinite loop)", "Wrong logic", "Syntax error", "None"],
-        correct: 0
-    }
+    // =================================================================
+    // NEW QUESTIONS (Отсебятина) (Starts at index 76)
+    // =================================================================
+    { text: "If a number $x$ is rounded to $k$ decimal places, the absolute error is bounded by:", options: ["$0.5 \\times 10^{-k}$", "$1.0 \\times 10^{-k}$", "$0.5 \\times 10^{k}$", "$10^{-k}$"], correct: 0 },
+    { text: "Which phenomenon occurs when subtracting two nearly equal numbers, leading to a drastic loss of precision?", options: ["Catastrophic cancellation (Loss of Significance)", "Overflow", "Underflow", "Quantization error"], correct: 0 },
+    { text: "The number $12.345$ rounded to 4 significant digits is:", options: ["12.34", "12.35", "12.340", "12.3"], correct: 1 },
+    { text: "Given true value $X_{true} = 3.14159$ and approximate $X_{approx} = 3.14$, the relative error is approximately:", options: ["$0.0005$", "$0.05\\%$", "$0.00159$", "$0.159$"], correct: 1 },
+    { text: "Numerical stability refers to:", options: ["How errors propagate through the algorithm", "The speed of the algorithm", "The amount of memory used", "The complexity of the code"], correct: 0 },
+    { text: "Calculate the absolute error if $X = 10.5$ and $X^* = 10.54$.", options: ["0.04", "0.004", "0.4", "-0.04"], correct: 0 },
+    { text: "What is the condition number of a function $f(x)$ used to measure?", options: ["Sensitivity of the output to small changes in input", "The number of iterations required", "The magnitude of the derivative", "The floating point precision"], correct: 0 },
+    { text: "In standard IEEE 754 double precision, approximately how many significant decimal digits can be stored?", options: ["15-17", "7-8", "30-32", "100"], correct: 0 },
+    { text: "Which method for finding roots requires the function to be continuous and change signs on the interval $[a, b]$?", options: ["Bisection Method", "Newton-Raphson", "Fixed Point", "Secant Method"], correct: 0 },
+    { text: "What is the order of convergence for the Newton-Raphson method (for a simple root)?", options: ["Quadratic (2)", "Linear (1)", "Cubic (3)", "Superlinear (1.618)"], correct: 0 },
+    { text: "What is the order of convergence for the Secant method?", options: ["~1.618 (Golden Ratio)", "2.0", "1.0", "3.0"], correct: 0 },
+    { text: "The Fixed Point iteration $x_{n+1} = g(x_n)$ converges if:", options: ["$|g'(x)| < 1$", "$|g'(x)| > 1$", "$g(x) = 0$", "$f'(x) = 0$"], correct: 0 },
+    { text: "If Newton's method is used on $f(x) = x^2 - 2$ with $x_0 = 1$, what is $x_1$?", options: ["1.5", "1.414", "2.0", "1.25"], correct: 0 },
+    { text: "Which method is generally considered 'safe' or 'robust' because it always converges if a bracket is found?", options: ["Bisection", "Newton-Raphson", "Secant", "Fixed Point"], correct: 0 },
+    { text: "Muller's method differs from the Secant method by using:", options: ["Quadratic interpolation (3 points)", "Linear interpolation (2 points)", "Tangents (1 point)", "Exponential fit"], correct: 0 },
+    { text: "In the False Position (Regula Falsi) method, the next approximation is calculated using:", options: ["The intersection of the secant line with the x-axis", "The midpoint of the interval", "The intersection of the tangent with the x-axis", "The function value at the midpoint"], correct: 0 },
+    { text: "Newton's method fails (division by zero) if:", options: ["$f'(x_n) = 0$", "$f(x_n) = 0$", "$f''(x_n) = 0$", "$x_n$ is negative"], correct: 0 },
+    { text: "For finding multiple roots (e.g., $f(x) = (x-1)^2$), the standard Newton method converges:", options: ["Linearly", "Quadratically", "Cubically", "It does not converge"], correct: 0 },
+    { text: "What is the formula for the Bisection method update?", options: ["$c = \\frac{a+b}{2}$", "$c = a - f(a)\\frac{b-a}{f(b)-f(a)}$", "$c = x - f(x)/f'(x)$", "$c = \sqrt{ab}$"], correct: 0 },
+    { text: "How many iterations of Bisection are roughly needed to gain 3 decimal digits of accuracy?", options: ["10", "3", "20", "100"], correct: 0 },
+    { text: "The computational complexity (Big O) of Gaussian Elimination for an $n \\times n$ system is:", options: ["$O(n^3)$", "$O(n^2)$", "$O(n)$", "$O(n^4)$"], correct: 0 },
+    { text: "Which step in Gaussian Elimination converts the matrix to Upper Triangular form?", options: ["Forward Elimination", "Back Substitution", "Normalization", "Pivoting"], correct: 0 },
+    { text: "Partial Pivoting is used in Gaussian Elimination primarily to:", options: ["Reduce round-off error and avoid division by zero", "Increase speed", "Make the matrix symmetric", "Calculate the determinant"], correct: 0 },
+    { text: "LU Factorization decomposes matrix $A$ into:", options: ["Lower triangular $L$ and Upper triangular $U$", "Diagonal $D$ and Identity $I$", "Orthogonal $Q$ and Upper $R$", "Symmetric $S$ and Skew $K$"], correct: 0 },
+    { text: "Once $A = LU$ is found, the system $Ax=b$ is solved by:", options: ["Solving $Ly=b$ then $Ux=y$", "Solving $Ux=b$ then $Ly=y$", "Multiplying $L$ and $U$", "Inverting $L$ only"], correct: 0 },
+    { text: "The determinant of an Upper Triangular matrix is:", options: ["The product of its diagonal elements", "The sum of its diagonal elements", "Always 1", "Always 0"], correct: 0 },
+    { text: "Cholesky Decomposition applies only to matrices that are:", options: ["Symmetric and Positive Definite", "Tridiagonal", "Singular", "Upper Triangular"], correct: 0 },
+    { text: "Gauss-Jordan elimination results in a matrix that is in:", options: ["Reduced Row Echelon Form (Identity)", "Row Echelon Form", "Lower Triangular Form", "Tridiagonal Form"], correct: 0 },
+    { text: "For a tridiagonal matrix, the Thomas Algorithm solves the system in:", options: ["$O(n)$", "$O(n^2)$", "$O(n^3)$", "$O(1)$"], correct: 0 },
+    { text: "If $\\det(A) = 0$, the system $Ax=b$ has:", options: ["Either no solution or infinite solutions", "A unique solution", "Exactly two solutions", "A trivial solution only"], correct: 0 },
+    { text: "A matrix $A$ is Strictly Diagonally Dominant if:", options: ["$|a_{ii}| > \\sum_{j \\neq i} |a_{ij}|$ for all $i$", "$|a_{ii}| < \\sum_{j \\neq i} |a_{ij}|$", "$a_{ii} = 1$", "It is symmetric"], correct: 0 },
+    { text: "The Jacobi method update for $x_i$ depends on:", options: ["Values from the previous iteration $(k)$", "Values from the current iteration $(k+1)$", "Only the vector $b$", "The determinant"], correct: 0 },
+    { text: "The Gauss-Seidel method differs from Jacobi by:", options: ["Using the most recently computed values immediately", "Using a relaxation factor", "Requiring a symmetric matrix", "Being slower"], correct: 0 },
+    { text: "A sufficient condition for the convergence of the Gauss-Seidel method is that $A$ is:", options: ["Strictly Diagonally Dominant", "Singular", "Sparse", "Orthogonal"], correct: 0 },
+    { text: "In the SOR (Successive Over-Relaxation) method, the parameter $\\omega$ usually lies in:", options: ["$(1, 2)$", "$(-1, 0)$", "$(0, 1)$", "$[2, 3]$"], correct: 0 },
+    { text: "If the spectral radius $\\rho(T) \\ge 1$ for the iteration matrix $T$, the method:", options: ["Diverges", "Converges slowly", "Converges rapidly", "Oscillates"], correct: 0 },
+    { text: "Given $2x + y = 3$ and $x + 2y = 3$. Start at $(0,0)$. First Jacobi iteration gives:", options: ["$x=1.5, y=1.5$", "$x=1, y=1$", "$x=3, y=3$", "$x=0.5, y=0.5$"], correct: 0 },
+    { text: "Why is Gauss-Seidel often preferred over Jacobi?", options: ["It usually converges faster and requires less memory", "It is easier to parallelize", "It works for all matrices", "It does not require diagonal dominance"], correct: 0 },
+    { text: "Which method is best suited for very large, sparse systems (like in PDE solving)?", options: ["Iterative methods (Gauss-Seidel/SOR)", "Cramer's Rule", "Gaussian Elimination", "Matrix Inversion"], correct: 0 },
+    { text: "The Power Method is used to find:", options: ["The largest eigenvalue (in magnitude)", "The smallest eigenvalue", "All eigenvalues", "The trace of the matrix"], correct: 0 },
+    { text: "The Inverse Power Method is used to find:", options: ["The eigenvalue closest to zero (smallest)", "The largest eigenvalue", "The determinant", "The eigenvector only"], correct: 0 },
+    { text: "Gershgorin's Circle Theorem provides:", options: ["Bounds for the locations of eigenvalues", "Exact values of eigenvalues", "The inverse of the matrix", "The condition number"], correct: 0 },
+    { text: "Jacobi's Method for eigenvalues is designed for:", options: ["Real Symmetric Matrices", "Any Matrix", "Upper Triangular Matrices", "Diagonal Matrices"], correct: 0 },
+    { text: "In the Power method, if $Av_k = \\lambda v_k$, then the Rayleigh quotient $\\frac{v^T A v}{v^T v}$ approximates:", options: ["$\\lambda$", "$\\lambda^2$", "$1/\\lambda$", "Determinant"], correct: 0 },
+    { text: "Shifted Inverse Power Method allows finding:", options: ["Eigenvalues closest to a given number $\\mu$", "Only the largest eigenvalue", "Only complex eigenvalues", "The matrix rank"], correct: 0 },
+    { text: "Eigenvalues of a diagonal matrix are:", options: ["The diagonal elements themselves", "All ones", "All zeros", "Sums of rows"], correct: 0 },
+    { text: "Lagrange interpolation polynomial of degree $n$ is determined by:", options: ["$n+1$ points", "$n$ points", "$n-1$ points", "$2n$ points"], correct: 0 },
+    { text: "The property $L_i(x_j) = \\delta_{ij}$ (1 if $i=j$, 0 else) belongs to:", options: ["Lagrange basis polynomials", "Newton basis", "Taylor series", "Fourier series"], correct: 0 },
+    { text: "Newton's Divided Difference form is preferred over Lagrange when:", options: ["We want to add new data points without recalculating everything", "The points are equally spaced", "We need the highest accuracy", "The function is periodic"], correct: 0 },
+    { text: "Runge's phenomenon (wild oscillations) occurs typically with:", options: ["High-degree polynomials on equidistant nodes", "Cubic splines", "Low-degree polynomials", "Chebyshev nodes"], correct: 0 },
+    { text: "A Natural Cubic Spline has zero second derivatives at:", options: ["The endpoints (boundaries)", "Every internal knot", "The midpoint", "Nowhere"], correct: 0 },
+    { text: "How many unknown coefficients does a cubic spline have for each interval?", options: ["4", "3", "2", "1"], correct: 0 },
+    { text: "For $n+1$ data points, the unique interpolating polynomial is of degree at most:", options: ["$n$", "$n+1$", "$n-1$", "$2n$"], correct: 0 },
+    { text: "The error in polynomial interpolation is proportional to:", options: ["The $(n+1)$-th derivative of the function", "The 1st derivative", "The function value", "The interval length only"], correct: 0 },
+    { text: "Chebyshev nodes are used in interpolation to:", options: ["Minimize the maximum interpolation error (avoid Runge's phenomenon)", "Simplify calculations", "Make the matrix diagonal", "Integrate faster"], correct: 0 },
+    { text: "What is linear interpolation?", options: ["Connecting two points with a straight line", "Using a parabola", "Using a step function", "Averaging all points"], correct: 0 },
+    { text: "Given points $(1,1)$ and $(3,5)$, the linear interpolant at $x=2$ is:", options: ["3", "2", "4", "2.5"], correct: 0 },
+    { text: "The Forward Difference approximation for $f'(x)$ is:", options: ["$\\frac{f(x+h) - f(x)}{h}$", "$\\frac{f(x) - f(x-h)}{h}$", "$\\frac{f(x+h) - f(x-h)}{2h}$", "$\\frac{f(x+h) - 2f(x) + f(x-h)}{h^2}$"], correct: 0 },
+    { text: "The Central Difference approximation has an error of order:", options: ["$O(h^2)$", "$O(h)$", "$O(h^3)$", "$O(h^4)$"], correct: 0 },
+    { text: "Which formula represents the second derivative $f''(x)$?", options: ["$\\frac{f(x+h) - 2f(x) + f(x-h)}{h^2}$", "$\\frac{f(x+h) - f(x)}{h^2}$", "$\\frac{f(x+h) - f(x-h)}{2h}$", "$\\frac{f(x) - 2f(x+h) + f(x+2h)}{h}$"], correct: 0 },
+    { text: "Why can't we simply make step size $h$ infinitely small to get perfect accuracy?", options: ["Round-off errors increase as $h$ decreases", "Truncation error increases", "Computer crashes", "Time complexity becomes infinite"], correct: 0 },
+    { text: "Richardson Extrapolation is used to:", options: ["Improve the accuracy of a numerical estimate (like derivative or integral)", "Solve differential equations", "Find roots", "Interpolate data"], correct: 0 },
+    { text: "Using forward difference with $h=0.1$ for $f(x)=x^2$ at $x=1$ gives:", options: ["2.1", "2.0", "1.9", "2.01"], correct: 0 },
+    { text: "The Trapezoidal Rule approximates the area under the curve using:", options: ["Trapezoids (Straight lines)", "Rectangles", "Parabolas", "Cubics"], correct: 0 },
+    { text: "Simpson's 1/3 Rule requires the number of sub-intervals $n$ to be:", options: ["Even", "Odd", "Multiple of 3", "Any integer"], correct: 0 },
+    { text: "Simpson's 3/8 Rule requires the number of sub-intervals $n$ to be:", options: ["Multiple of 3", "Even", "Odd", "Power of 2"], correct: 0 },
+    { text: "Which method is generally more accurate for the same number of points?", options: ["Simpson's Rule", "Trapezoidal Rule", "Left Riemann Sum", "Right Riemann Sum"], correct: 0 },
+    { text: "Boole's Rule uses how many points for a single step?", options: ["5 points (degree 4 poly)", "3 points", "2 points", "7 points"], correct: 0 },
+    { text: "The error term for the Trapezoidal rule is proportional to:", options: ["$h^2$", "$h$", "$h^3$", "$h^4$"], correct: 0 },
+    { text: "Gaussian Quadrature is unique because it:", options: ["Uses non-equally spaced nodes to maximize precision", "Uses equal spacing", "Uses only endpoints", "Works only for polynomials"], correct: 0 },
+    { text: "Using Trapezoidal rule for $\\int_0^1 x dx$ with $n=1$ gives:", options: ["0.5", "1.0", "0.0", "0.25"], correct: 0 },
+    { text: "Romberg Integration is based on:", options: ["Repeated Richardson Extrapolation of Trapezoidal sums", "Simpson's rule only", "Monte Carlo", "Differentiation"], correct: 0 },
+    { text: "Simpson's 1/3 rule is exact for polynomials up to degree:", options: ["3 (Cubic)", "2 (Quadratic)", "1 (Linear)", "4"], correct: 0 },
+    { text: "Euler's method is a:", options: ["First-order method", "Second-order method", "Fourth-order method", "Zero-order method"], correct: 0 },
+    { text: "The local truncation error of Euler's method is $O(h^2)$, so the Global Error is:", options: ["$O(h)$", "$O(h^2)$", "$O(h^3)$", "$O(1)$"], correct: 0 },
+    { text: "Modified Euler's method (Heun's method) improves Euler by:", options: ["Averaging the slopes at the beginning and end of the interval", "Using a smaller step size", "Using 4 intermediate points", "Using derivatives"], correct: 0 },
+    { text: "Runge-Kutta 4th Order (RK4) has a global error of:", options: ["$O(h^4)$", "$O(h^2)$", "$O(h^5)$", "$O(h)$"], correct: 0 },
+    { text: "How many function evaluations are needed per step in RK4?", options: ["4", "1", "2", "6"], correct: 0 },
+    { text: "Picard's method solves ODEs by:", options: ["Successive integration", "Differentiation", "Matrix inversion", "Guessing"], correct: 0 },
+    { text: "A 'Stiff' ODE requires which type of method for stability?", options: ["Implicit method (e.g., Backward Euler)", "Explicit Euler", "Explicit RK4", "Midpoint method"], correct: 0 },
+    { text: "For $y' = y, y(0)=1$, Euler's method with $h=1$ gives $y(1) = $?", options: ["2", "1", "2.718", "1.5"], correct: 0 },
+    { text: "Taylor Series method of order $k$ requires:", options: ["Computing derivatives up to order $k$", "Only the first derivative", "No derivatives", "Integration"], correct: 0 },
+    { text: "Which of these is a 'Multi-step' method?", options: ["Adams-Bashforth", "Runge-Kutta", "Euler", "Heun"], correct: 0 },
+    { text: "The Midpoint method (RK2) estimates the slope at:", options: ["$x + h/2$", "$x + h$", "$x$", "$x + h/4$"], correct: 0 },
+    { text: "Boundary Value Problems (BVP) can be solved using:", options: ["Shooting Method or Finite Differences", "Euler's Method only", "Simpson's Rule", "Picard's method only"], correct: 0 },
+    { text: "In the context of ODEs, 'autonomous' means:", options: ["The function $f(x,y)$ does not explicitly depend on $x$ (time)", "The system solves itself", "No initial conditions", "Linear equation"], correct: 0 },
+    { text: "Predictor-Corrector methods typically combine:", options: ["An explicit step (Predict) and an implicit step (Correct)", "Two explicit steps", "Two implicit steps", "Integration and differentiation"], correct: 0 },
+    { text: "If step size $h$ is halved in a 4th order method, the error decreases by factor of:", options: ["16", "4", "2", "8"], correct: 0 }
 ];
