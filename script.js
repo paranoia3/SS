@@ -22,13 +22,15 @@ function startQuiz(m, variant) {
     currentQ = 0;
     userAns = [];
 
-    // Разделение по вариантам (32 и 33)
-    const mid = 32;
-    activeQuestions = (variant === 1) ? questions.slice(0, mid) : questions.slice(mid);
+    // Используем все вопросы
+    activeQuestions = questions;
+    // Если нужно разделение на варианты, можно раскомментировать и адаптировать:
+    // const mid = Math.ceil(questions.length / 2);
+    // activeQuestions = (variant === 1) ? questions.slice(0, mid) : questions.slice(mid);
 
     document.getElementById('setup-screen').classList.add('hidden');
     document.getElementById('quiz-screen').classList.remove('hidden');
-    document.getElementById('mode-indicator').innerText = `РЕЖИМ: ${m === 'training' ? 'ОБУЧЕНИЕ' : 'ЭКЗАМЕН'} (ВАР. ${variant})`;
+    document.getElementById('mode-indicator').innerText = `РЕЖИМ: ${m === 'training' ? 'ОБУЧЕНИЕ' : 'ЭКЗАМЕН'}`;
 
     window.scrollTo(0, 0);
     renderQuestion();
@@ -52,15 +54,12 @@ function renderQuestion() {
     }
 
     // ЛОГИКА РАНДОМИЗАЦИИ ВАРИАНТОВ
-    // Создаем массив объектов {текст, метка_правильности}
     const optionsWithIndices = q.options.map((text, index) => ({
         text,
         isOriginalCorrect: index === q.correct
     }));
 
-    // Перемешиваем
     currentShuffledOptions = shuffle([...optionsWithIndices]);
-    // Находим новый индекс правильного ответа
     correctShuffledIdx = currentShuffledOptions.findIndex(o => o.isOriginalCorrect);
 
     const optCont = document.getElementById('options-container');
@@ -77,6 +76,18 @@ function renderQuestion() {
         optCont.appendChild(btn);
     });
 
+    // --- KaTeX Rendering Trigger ---
+    // Этот код найдет все элементы с LaTeX ($...$) внутри quiz-card и отрендерит их
+    if (window.renderMathInElement) {
+        renderMathInElement(document.getElementById('quiz-screen'), {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        });
+    }
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
     document.getElementById('next-btn').innerText = currentQ === activeQuestions.length - 1 ? 'ФИНИШ' : 'ДАЛЕЕ →';
 }
@@ -87,7 +98,6 @@ function selectOpt(idx, el) {
     answered = true;
     const isCorrect = idx === correctShuffledIdx;
 
-    // Сохраняем для финального отчета
     userAns[currentQ] = {
         selectedIdx: idx,
         correctIdx: correctShuffledIdx,
@@ -100,15 +110,13 @@ function selectOpt(idx, el) {
         if (isCorrect) {
             el.classList.add('correct');
             score++;
-            showFeedback("Правильно!", true);
+            showFeedback("Correct!", true);
         } else {
             el.classList.add('wrong');
-            // При ошибке всегда подсвечиваем правильный
             allBtns[correctShuffledIdx].classList.add('correct');
-            showFeedback("Ошибка!", false);
+            showFeedback("Incorrect!", false);
         }
     } else {
-        // Экзамен: просто выделяем выбранное
         allBtns.forEach(b => b.classList.remove('selected'));
         el.classList.add('selected');
     }
@@ -162,5 +170,17 @@ function showResults() {
         `;
         review.appendChild(div);
     });
+
+    // Рендер формул в результатах
+    if (window.renderMathInElement) {
+        renderMathInElement(review, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false}
+            ],
+            throwOnError: false
+        });
+    }
+
     window.scrollTo(0, 0);
 }
