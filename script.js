@@ -30,6 +30,8 @@ function startQuiz(m, variant) {
     document.getElementById('quiz-screen').classList.remove('hidden');
     document.getElementById('mode-indicator').innerText = `РЕЖИМ: ${m === 'training' ? 'ОБУЧЕНИЕ' : 'ЭКЗАМЕН'} (ВАР. ${variant})`;
 
+    // Прокрутка вверх при старте
+    window.scrollTo(0, 0);
     renderQuestion();
 }
 
@@ -69,6 +71,8 @@ function renderQuestion() {
         optCont.appendChild(btn);
     });
 
+    // Плавный скролл к началу вопроса
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     document.getElementById('next-btn').innerText = currentQ === activeQuestions.length - 1 ? 'ФИНИШ' : 'ДАЛЕЕ →';
 }
 
@@ -141,12 +145,13 @@ function showResults() {
         const div = document.createElement('div');
         div.className = 'review-item';
         div.innerHTML = `
-            <p style="font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">${i+1}. ${q.text}</p>
-            <div style="font-size: 0.85rem; font-weight: 600;">
+            <p style="font-weight: 800; color: #0f172a; margin-bottom: 0.5rem; font-size: 0.95rem;">${i+1}. ${q.text}</p>
+            <div style="font-size: 0.85rem; font-weight: 600; line-height: 1.4;">
                 <span style="color: ${isOk ? '#10b981' : '#ef4444'}">Ваш ответ: ${data.shuffledOptions[data.selectedIdx].text}</span><br>
                 ${!isOk ? `<span style="color: #10b981">Правильный: ${data.shuffledOptions[data.correctIdx].text}</span>` : ''}
             </div>
         `;
         review.appendChild(div);
     });
+    window.scrollTo(0, 0);
 }
