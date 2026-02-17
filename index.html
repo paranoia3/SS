@@ -4,94 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Numerical Methods - Pro Trainer</title>
-
-    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
-
     <!-- KaTeX CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" xintegrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous">
-
-    <!-- Стили -->
-    <link rel="stylesheet" href="style.css">
-
     <!-- KaTeX JS -->
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" xintegrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" xintegrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOc7Th/vnX09CaraGC0M9VdGW92NOqnzF5Esz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" xintegrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
 </head>
 <body>
+<div id="app" class="container-main">
 
-<!-- ЭКРАН ВЫБОРА РЕЖИМА -->
-<div id="start-screen" class="container-main fade-in">
-    <h1>Numerical Methods</h1>
-    <p class="subtitle">Варианты "отсебятина" - это вопросы которых не было на мидке/ендке, я просто попросил гемини сгенерировать мне еще вопросов чисто что бы закрепить материал. Можете их не проходить если не хотите. А так все вопросы которые я нашел есть в 1 и 2 варианте(будьте начеку, правильные ответы мне подбирал гемини, я честно хз насколько они все правильные. А так да, Еркош легенда)</p>
+    <!-- Стартовый экран -->
+    <div id="setup-screen" class="screen fade-in">
+        <header class="header-content">
+            <span class="badge">еркош легенда</span>
+            <h1>Numerical Methods</h1>
+            <p>Полная база из 76 вопросов. Выберите вариант для тренировки.</p>
+        </header>
 
-    <div class="mode-selection-grid">
-        <button onclick="startQuiz(1)" class="variant-btn">
-            <h3>📜 Вариант 1</h3>
-            <p>Базовые вопросы (Original Part 1)</p>
-        </button>
-        <button onclick="startQuiz(2)" class="variant-btn">
-            <h3>📐 Вариант 2</h3>
-            <p>Продвинутые вопросы (Original Part 2)</p>
-        </button>
-        <button onclick="startQuiz(3)" class="variant-btn" style="border-color: #f59e0b;">
-            <h3>🔥 Отсебятина I</h3>
-            <p>Новые вопросы (Part 1)</p>
-        </button>
-        <button onclick="startQuiz(4)" class="variant-btn" style="border-color: #ef4444;">
-            <h3>💀 Отсебятина II</h3>
-            <p>Новые вопросы (Part 2)</p>
-        </button>
+        <div class="mode-selection-grid">
+            <!-- Обучение -->
+            <div class="mode-group">
+                <div class="mode-header training-bg">
+                    <span class="mode-icon">📖</span>
+                    <h3>Обучение</h3>
+                </div>
+                <p class="mode-desc">Результат виден сразу. Идеально для запоминания теории.</p>
+                <div class="variant-btns">
+                    <button onclick="startQuiz('training', 1)" class="variant-btn">Часть 1 (1-38)</button>
+                    <button onclick="startQuiz('training', 2)" class="variant-btn">Часть 2 (39-76)</button>
+                </div>
+            </div>
+
+            <!-- Экзамен -->
+            <div class="mode-group">
+                <div class="mode-header exam-bg">
+                    <span class="mode-icon">🎯</span>
+                    <h3>Экзамен</h3>
+                </div>
+                <p class="mode-desc">Результаты и ошибки — только в самом конце теста.</p>
+                <div class="variant-btns">
+                    <button onclick="startQuiz('exam', 1)" class="variant-btn">Часть 1 (1-38)</button>
+                    <button onclick="startQuiz('exam', 2)" class="variant-btn">Часть 2 (39-76)</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Квиз -->
+    <div id="quiz-screen" class="hidden">
+        <nav class="quiz-nav">
+            <button onclick="location.reload()" class="btn-back">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                <span>МЕНЮ</span>
+            </button>
+            <div id="mode-indicator" class="tag shadow-sm">РЕЖИМ: ОБУЧЕНИЕ</div>
+        </nav>
+
+        <main class="quiz-card glass">
+            <div class="progress-container">
+                <div id="progress-bar" class="progress-bar"></div>
+            </div>
+
+            <div class="card-body">
+                <div id="question-counter" class="label-info italic tracking-widest text-center md:text-left">Question 1</div>
+                <h2 id="question-text" class="question-text">Загрузка вопроса...</h2>
+
+                <div id="code-container" class="hidden">
+                    <pre id="question-code" class="code-box"></pre>
+                </div>
+
+                <div id="options-container" class="options-grid"></div>
+
+                <footer class="card-footer">
+                    <div id="feedback" class="feedback-label">Correct!</div>
+                    <button id="next-btn" onclick="handleNext()" class="btn-next">СЛЕДУЮЩИЙ →</button>
+                </footer>
+            </div>
+        </main>
+    </div>
+
+    <!-- Результаты -->
+    <div id="result-screen" class="hidden fade-in py-10">
+        <div class="result-card glass">
+            <div class="result-header">
+                <div class="icon-win">🏆</div>
+                <h2>Ваш результат</h2>
+                <div id="final-score" class="final-score">0 / 0</div>
+            </div>
+
+            <div id="review-container" class="review-scroll"></div>
+
+            <button onclick="location.reload()" class="btn-restart shadow-lg">ВЕРНУТЬСЯ В МЕНЮ</button>
+        </div>
     </div>
 </div>
 
-<!-- ЭКРАН ВИКТОРИНЫ -->
-<div id="quiz-screen" class="container-main hidden">
-    <main class="question-card glass fade-in">
-        <div class="progress-container">
-            <div id="progress-bar" class="progress-bar"></div>
-        </div>
-
-        <div class="card-body">
-            <!-- Шапка вопроса с кнопкой выхода -->
-            <div class="flex justify-between items-center mb-4">
-                <div id="question-counter" class="text-sm font-bold text-slate-400 uppercase tracking-widest">Question 1</div>
-                <button onclick="goToMenu()" class="text-sm font-bold text-slate-400 hover:text-red-500 transition-colors cursor-pointer">✕ МЕНЮ</button>
-            </div>
-
-            <h2 id="question-text" class="question-text">Загрузка...</h2>
-
-            <div id="code-container" class="hidden">
-                <pre id="question-code" class="code-box"></pre>
-            </div>
-
-            <div id="options-container" class="options-grid"></div>
-
-            <footer class="card-footer">
-                <div id="feedback" class="feedback-label">Correct!</div>
-                <button id="next-btn" onclick="handleNext()" class="btn-next">СЛЕДУЮЩИЙ →</button>
-            </footer>
-        </div>
-    </main>
-</div>
-
-<!-- ЭКРАН РЕЗУЛЬТАТОВ -->
-<div id="result-screen" class="container-main hidden">
-    <div class="result-card glass fade-in">
-        <div class="result-header">
-            <div class="icon-win">🏆</div>
-            <h2 class="text-3xl font-bold text-slate-800">Результат</h2>
-            <div id="final-score" class="final-score">0 / 0</div>
-        </div>
-
-        <div id="review-container" class="review-scroll"></div>
-
-        <!-- Кнопка возврата в меню -->
-        <button onclick="goToMenu()" class="btn-restart shadow-lg">ВЕРНУТЬСЯ В МЕНЮ</button>
-    </div>
-</div>
-
-<!-- Скрипты -->
 <script src="questions.js"></script>
 <script src="script.js"></script>
 </body>
